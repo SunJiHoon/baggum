@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     //Express.js 를 이용
+    //npm install express --save
     "express": "^4.19.2"
   }
 }

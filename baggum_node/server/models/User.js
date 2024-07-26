@@ -18,16 +18,19 @@ class User extends Model {
     // return bcrypt.compare(plainPassword, this.password);
   }
 
-  generateToken() {
+  async generateToken() {
     const token = jwt.sign({ id: this.id }, 'secretToken');
     this.token = token;
-    return this.save();
+    await this.save();
+    return token;
   }
 
   static async findByToken(token) {
     try {
       const decoded = jwt.verify(token, 'secretToken');
-      return await User.findOne({ where: { id: decoded.id, token } });
+      console.log(decoded);
+      const user = await User.findOne({ where: { id: decoded.id, token } });
+      return user;
     } catch (err) {
       throw err;
     }

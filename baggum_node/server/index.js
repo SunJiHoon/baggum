@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
-const { User } = require('./models/User');
+const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
 
 
 //application/x-www-form-urlencoded
@@ -25,13 +25,19 @@ const corsOptions = {
 app.use(cors(corsOptions)); // Use the cors middleware with your options
 
 
-const mongoose = require('mongoose');
-mongoose.connect(config.mongoURI,
-    // {
-    //     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
-    // }
-).then(() => console.log("MongoDB Connected..."))
-.catch(err => console.log(err))
+// 모델 동기화
+sequelize.sync()
+  .then(() => console.log('Database synced'))
+  .catch(err => console.error('Error syncing database:', err));
+
+
+// const mongoose = require('mongoose');
+// mongoose.connect(config.mongoURI,
+//     // {
+//     //     useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false
+//     // }
+// ).then(() => console.log("MongoDB Connected..."))
+// .catch(err => console.log(err))
 
 
 app.get('/', (req, res) => {

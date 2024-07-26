@@ -9,11 +9,16 @@ function LandingPage() {
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    // axios.get("http://localhost:5000/api/hello")
-    axios.get("/api/hello")
-    .then(response => console.log(response.data));
-  },[]);
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    } else {
+      // axios.get("http://localhost:5000/api/hello")
+      // axios.get("/api/hello")
+      // .then(response => console.log(response.data));
+    }
+  }, [isAuthenticated, navigate]);
+
 
 
   const baseUrl = process.env.REACT_APP_BASE_URL;

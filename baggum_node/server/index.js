@@ -79,38 +79,79 @@ app.post('/api/users/register',(req,res) => {
 }
 );
 
-
-app.post('/api/users/login',(req,res) => {
+app.post('/api/users/login', async (req, res) => {
   console.log(req);
-  //요청된 이메일을 데이터베이스에 있는지 찾는다.
-  User.findOne({email: req.body.email})
-  .then(user=>{
-    if(!user){
-      return res.json({
-        loginSuccess : false,
-        message : "제공된 이메일에 해당하는 유저가 없습니다."
-      })
-    }
-    //요청된 이메일이 데이터 베이스에 있다면 비밀번호가 맞는 비밀번호인지 확인.
-    user.comparePassword(req.body.password, (err, isMatch) =>{
-      if(!isMatch)
-        return res.json({loginSuccess: false, message: "비밀번호가 틀렸습니다."});
-      //비밀번호까지 맞다면 토큰을 생성하기.
-      user.generateToken((err, user) => {
-        //토큰을 저장한다. 어디에? 쿠키, 
-        if(err) return res.status(400).send(err);
-        res.cookie("x_auth", user.token)
-        .status(200)
-        .json({loginSuccess:true, userId:user._id})
-      })
-    })
-  })
-  .catch(err => {
-    console.error(err);
-    return res.json({success : false, err});
-  });
 
+  try {
+    // 요청된 이메일을 데이터베이스에서 찾는다.
+    const user = await User.findOne({
+      where: { email: req.body.email }
+    });
+
+    if (!user) {
+      return res.json({
+        loginSuccess: false,
+        message: "제공된 이메일에 해당하는 유저가 없습니다."
+      });
+    }
+
+    // 요청된 이메일이 데이터베이스에 있다면 비밀번호가 맞는지 확인.
+    const isMatch = await user.comparePassword(req.body.password);
+
+    if (!isMatch) {
+      return res.json({ loginSuccess: false, message: "비밀번호가 틀렸습니다." });
+    }
+
+    // 비밀번호가 맞다면 토큰을 생성하기.
+    console.log("비밀번호가 맞습니다. 토큰 생성 중");
+    const token = await user.generateToken();
+
+    // 토큰을 저장한다. 어디에? 쿠키에
+    res.cookie("x_auth", token)
+      .status(200)
+      .json({ loginSuccess: true, userId: user.id });
+
+  } catch (error) {
+    console.error('로그인 중 에러 발생:', error);
+    return res.status(500).json({ success: false, error: '서버 에러 발생' });
+  }
 });
+
+// app.post('/api/users/login',(req,res) => {
+//   console.log(req);
+//   //요청된 이메일을 데이터베이스에 있는지 찾는다.
+//   User.findOne({
+//     where: { email: req.body.email }
+//   })
+//   .then(user=>{
+//     if(!user){
+//       return res.json({
+//         loginSuccess : false,
+//         message : "제공된 이메일에 해당하는 유저가 없습니다."
+//       })
+//     }
+//     //요청된 이메일이 데이터 베이스에 있다면 비밀번호가 맞는 비밀번호인지 확인.
+//     user.comparePassword(req.body.password, (err, isMatch) =>{
+//       if(!isMatch)
+//         return res.json({loginSuccess: false, message: "비밀번호가 틀렸습니다."});
+//       //비밀번호까지 맞다면 토큰을 생성하기.
+//       console.log(isMatch);
+//       console.log("토큰 생성중");
+//       user.generateToken((err, user) => {
+//         //토큰을 저장한다. 어디에? 쿠키, 
+//         if(err) return res.status(400).send(err);
+//         res.cookie("x_auth", user.token)
+//         .status(200)
+//         .json({loginSuccess:true, userId:user._id})
+//       })
+//     })
+//   })
+//   .catch(err => {
+//     console.error(err);
+//     return res.json({success : false, err});
+//   });
+
+// });
 
 
 

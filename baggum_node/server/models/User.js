@@ -11,7 +11,11 @@ const sequelize = new Sequelize('baggum', 'cangogi1', 'dkagh123!@#A', {
 // User 모델 정의
 class User extends Model {
   async comparePassword(plainPassword) {
-    return bcrypt.compare(plainPassword, this.password);
+    console.log("비밀번호 비교중");
+    const isMatch = await bcrypt.compare(plainPassword, this.password);
+    console.log(isMatch);
+    return isMatch;
+    // return bcrypt.compare(plainPassword, this.password);
   }
 
   generateToken() {

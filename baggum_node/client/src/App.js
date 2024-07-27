@@ -12,6 +12,8 @@ import LandingPage from "./components/views/LandingPage/LandingPage";
 import LoginPage from "./components/views/LoginPage/LoginPage";
 import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 import ChatPage from "./components/views/ChatPage/ChatPage";
+import ChatRoom from "./components/views/ChatPage/ChatRoom";
+import Room from "./components/views/ChatPage/Room";
 
 
 function App() {
@@ -27,10 +29,10 @@ function App() {
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/chat" element={<ChatPage />} />
-          {/* 
-          <Route exact path="/chat/:roomId" element={<ChatPage />} />
-          <Route exact path="/chat" element={<ChatPage />} />
-          */}
+          
+          <Route exact path="/chat/room" element={<ChatRoom />} />
+          <Route exact path="/chat/room/:roomId" element={<Room />} />
+         
         </Routes>
       </div>
     </BrowserRouter>

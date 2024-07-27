@@ -14,14 +14,22 @@ const io = socketIo(server, {
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.on('message', (message) => {
-    io.emit('message', message);
+  // 사용자 특정 방에 참여
+  socket.on('joinRoom', ({ userId, roomId }) => {
+    socket.join(roomId);
+    console.log(`${userId} joined room ${roomId}`);
+  });
+
+  // 방으로 메시지 보내기
+  socket.on('message', ({ roomId, message }) => {
+    io.to(roomId).emit('message', message);
   });
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
+
 
 const port = 5000;
 const bodyParser = require('body-parser');

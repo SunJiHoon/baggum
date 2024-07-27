@@ -3,7 +3,9 @@ import io from 'socket.io-client';
 import { useParams, useNavigate } from 'react-router-dom';  // useNavigate로 변경
 import axios from 'axios';
 
-const socket = io('http://localhost:5000');
+const socket = io('http://localhost:5000', {
+  transports: ['websocket', 'polling']
+});
 
 const ChatPage = () => {
   const { roomId } = useParams();
@@ -55,7 +57,9 @@ const ChatPage = () => {
           />
           <button onClick={sendMessage}>Send</button>
         </div>
-      ) : (
+      ) 
+      :
+       (
         <button onClick={createRoom}>Create Room</button>
       )}
     </div>

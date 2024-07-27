@@ -46,7 +46,12 @@ const server = http.createServer(app);
 
 // initializeWebSocketServer(server);
 // WebSocket 서버 설정
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
 
 io.on('connection', (socket) => {
   console.log('New client connected');

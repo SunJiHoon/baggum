@@ -1,3 +1,4 @@
+// index.js
 const express = require('express');
 const http = require('http'); // <-- http 모듈을 불러옵니다.
 const socketIo = require('socket.io');
@@ -63,14 +64,10 @@ sequelize.sync()
 
 // 라우트
 const userRoutes = require('./routes/userRoutes');
-const chatRoutes = require('./routes/chatRoutes');
+const chatRoutes = require('./routes/chatRoutes')(io);
+const { Server } = require('https');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
-
-
-// app.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

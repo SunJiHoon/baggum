@@ -1,9 +1,11 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('../config/dev'); // dev.js 파일 가져오기
+
 
 // MySQL 데이터베이스 연결 설정
-const sequelize = new Sequelize('config.DB_NAME, config.DB_USER, config.DB_PASSWORD', {
+const sequelize = new Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
   host: config.DB_HOST,
   dialect: config.DB_DIALECT
 });

@@ -22,26 +22,14 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        {/* A <Switch> looks through its children <Route>s and
-          renders the first one that matches the current URL. */}
         <Routes>
-        {/* <Route exact path="/" element={ <LandingPage /> } /> */}
-        {/* <Route path="/login" element={<newLoginPage />} />
-          <Route path="/register" element={<newRegisterPage />} /> */}
-          
-          {/* <Route exact path="/" element={Auth(LandingPage, null)} />
-          <Route exact path="/login" element={Auth(LoginPage, false)} />
-          <Route exact path="/register" element={Auth(RegisterPage, false)} /> */}
-
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
+          {/* 
           <Route exact path="/chat/:roomId" element={<ChatPage />} />
           <Route exact path="/chat" element={<ChatPage />} />
-
-          {/* <Route exact path="/" element={LandingPage()} />
-          <Route exact path="/login" element={LoginPage()} />
-          <Route exact path="/register" element={RegisterPage()} /> */}
+          */}
         </Routes>
       </div>
     </BrowserRouter>

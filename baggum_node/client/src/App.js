@@ -26,6 +26,7 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
+          <Route exact path="/chat" element={<ChatPage />} />
           {/* 
           <Route exact path="/chat/:roomId" element={<ChatPage />} />
           <Route exact path="/chat" element={<ChatPage />} />

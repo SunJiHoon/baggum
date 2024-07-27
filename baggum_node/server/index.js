@@ -1,14 +1,24 @@
 // index.js
-const http = require('http'); // <-- http 모듈을 불러옵니다.
 const express = require('express');
+const http = require('http'); // <-- http 모듈을 불러옵니다.
+const socketIo = require('socket.io');
+
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
+
+
 const port = 5000;
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
-const socketIo = require('socket.io');
 
 
 //application/x-www-form-urlencoded
@@ -38,6 +48,23 @@ const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
+
+
+
+
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('message', (message) => {
+    io.emit('message', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

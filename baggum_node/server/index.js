@@ -1,4 +1,5 @@
 // index.js
+const http = require('http'); // <-- http 모듈을 불러옵니다.
 const express = require('express');
 const app = express();
 const port = 5000;
@@ -7,6 +8,8 @@ const cookieParser = require('cookie-parser')
 const config = require('./config/key')
 const { auth } = require('./middleware/auth')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
+const initializeWebSocketServer = require('./routes/chatServer');
+const socketIo = require('socket.io');
 
 
 //application/x-www-form-urlencoded
@@ -31,10 +34,42 @@ sequelize.sync()
   .catch(err => console.error('Error syncing database:', err));
 
 
-// Routes
+// 라우트
 const userRoutes = require('./routes/userRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 app.use('/api/users', userRoutes);
+app.use('/api/chat', chatRoutes);
 
+// HTTP 서버 생성 및 WebSocket 초기화
+const server = http.createServer(app);
+
+
+// initializeWebSocketServer(server);
+// WebSocket 서버 설정
+const io = socketIo(server);
+
+io.on('connection', (socket) => {
+  console.log('New client connected');
+
+  socket.on('joinRoom', (roomId) => {
+    socket.join(roomId);
+    console.log(`User joined room: ${roomId}`);
+  });
+
+  socket.on('leaveRoom', (roomId) => {
+    socket.leave(roomId);
+    console.log(`User left room: ${roomId}`);
+  });
+
+  socket.on('message', ({ roomId, message }) => {
+    io.to(roomId).emit('message', message);
+    console.log(`Message to room ${roomId}: ${message}`);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('Client disconnected');
+  });
+});
 
 
 app.listen(port, () => {

@@ -11,7 +11,7 @@ import {
 import LandingPage from "./components/views/LandingPage/LandingPage";
 import LoginPage from "./components/views/LoginPage/LoginPage";
 import RegisterPage from "./components/views/RegisterPage/RegisterPage";
-import Auth from "./hoc/auth";
+import ChatPage from "./components/views/ChatPage/ChatPage";
 
 
 function App() {
@@ -36,6 +36,8 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
+          <Route exact path="/chat/:roomId" element={<ChatPage />} />
+          <Route exact path="/chat" element={<ChatPage />} />
 
           {/* <Route exact path="/" element={LandingPage()} />
           <Route exact path="/login" element={LoginPage()} />

@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // MySQL 데이터베이스 연결 설정
-const sequelize = new Sequelize('baggum', 'cangogi1', 'dkagh123!@#A', {
-  host: 'localhost',
-  dialect: 'mysql'
+const sequelize = new Sequelize('config.DB_NAME, config.DB_USER, config.DB_PASSWORD', {
+  host: config.DB_HOST,
+  dialect: config.DB_DIALECT
 });
 
 // User 모델 정의

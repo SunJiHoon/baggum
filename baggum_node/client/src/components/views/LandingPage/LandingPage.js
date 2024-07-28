@@ -30,6 +30,8 @@ function LandingPage() {
   }
 
   return (
+    <div>
+            <NavBar />
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
       width: '100%', height: '100vh'
@@ -38,6 +40,8 @@ function LandingPage() {
       <button onClick={onClickHandler}>
         로그아웃
       </button>
+    </div>
+
     </div>
   )
 }

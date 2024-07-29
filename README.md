@@ -1,6 +1,11 @@
 # Baggum
 
-![Baggum 로고](path/to/logo.png)
+<img src="https://github.com/user-attachments/assets/84eaf02a-5704-4aa7-9773-2fd53bcdf715" alt="Baggum 로고" width="300"/>
+
+<!--!
+[Baggum 로고](https://github.com/user-attachments/assets/84eaf02a-5704-4aa7-9773-2fd53bcdf715)
+-->
+
 
 **Baggum**에 오신 것을 환영합니다. Baggum은 물건과 서비스를 교환할 수 있는 최상의 플랫폼입니다. 더 이상 필요하지 않은 물건을 교환하거나 다른 사람들과 기술을 교환하고 싶다면, Baggum이 쉽고 즐거운 경험을 제공합니다.
 

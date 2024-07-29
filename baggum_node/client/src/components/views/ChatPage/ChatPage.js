@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import NavBar from '../NavBar/NavBar';
 
 const socket = io('http://localhost:5000');
 
@@ -24,6 +25,7 @@ function ChatPage() {
 
   return (
     <div>
+      <NavBar />
       <h1>Chat Rooma</h1>
       <div>
         {messages.map((msg, index) => (

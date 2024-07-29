@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { loginUser } from '../../../_actions/user_action'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import NavBar from '../NavBar/NavBar';
 
 function LoginPage() {
   const { isAuthenticated, loading } = useAuth();
@@ -55,6 +56,8 @@ function LoginPage() {
   }
 
   return (
+    <div>
+            <NavBar />
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
       width: '100%', height: '100vh'
@@ -73,6 +76,7 @@ function LoginPage() {
 
 
       </form>
+    </div>
     </div>
   )
 }

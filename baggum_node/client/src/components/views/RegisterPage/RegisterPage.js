@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../../../_actions/user_action'
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../NavBar/NavBar';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -52,6 +53,7 @@ function RegisterPage() {
   }
   return (
     <div>
+      <NavBar />
       <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
       width: '100%', height: '100vh'

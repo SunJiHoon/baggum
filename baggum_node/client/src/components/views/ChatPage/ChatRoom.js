@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
+import NavBar from '../NavBar/NavBar';
 
 const socket = io('http://localhost:5000');
 
@@ -38,6 +39,7 @@ const ChatRoom = ({ userId }) => {
 
   return (
     <div>
+            <NavBar />
       <button onClick={createRoom}>Create Room</button>
       <input
         type="text"

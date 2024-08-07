@@ -90,29 +90,6 @@ router.get('/logout', auth, async (req, res) => {
 
 
 
-router.get('/auth/chat', auth, async (req, res) => { // 해당 채팅방에 할당된 유저가 아니면 들어올 수 없음
-  const { roomId } = req.query;
 
-  if (!roomId) {
-    return res.status(400).json({ error: 'roomId is required '});
-  }
-
-  try {
-    const UserRoomMappings = await UserRoomMapping.findAll({ where: { roomId }});
-    if (UserRoomMappings.length !== 2) {
-      return res.status(403).json({ error: 'Unauthorized' });
-    }
-
-    const userIds = UserRoomMappings.map(mapping => mapping.userId);
-    if (!userIds.includes(req.user.id)) {
-      return res.status(403).json({ error: 'Unauthorized' });
-    }
-
-    res.status(200).json({ message: 'Welcome to the chat room!' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
 
 module.exports = router;

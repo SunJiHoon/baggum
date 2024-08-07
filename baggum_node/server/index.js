@@ -18,6 +18,8 @@ const cookieParser = require('cookie-parser')
 // const config = require('./config/key')
 // const { auth } = require('./middleware/auth')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
+const Room = require('./models/Room');
+const UserRoomMapping = require('./models/userRoomMapping');
 
 
 //application/x-www-form-urlencoded

@@ -1,0 +1,197 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    width: 1182px;
+    height: 585px;
+    background-color: #EDF6E9;
+    border: 1px solid #757575;
+    border-radius: 8px; 
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 32px;
+}
+
+.chat-NavBar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 44px;
+    background-color: #F8F8F8;
+    border: 1px solid #757575;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.chat-username {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+.solar--arrow-up-outline {
+    position: absolute;
+    left: 10px;
+    display: inline-block;
+    width: 38px;
+    height: 38px;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f00' fill-rule='evenodd' d='M11.47 3.47a.75.75 0 0 1 1.06 0l6 6a.75.75 0 1 1-1.06 1.06l-4.72-4.72V20a.75.75 0 0 1-1.5 0V5.81l-4.72 4.72a.75.75 0 1 1-1.06-1.06z' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    color: rgb(0, 0, 0);
+    transform: rotate(-90deg); 
+}
+/*license: CC BY 4.0*/
+
+.sendMessage-container {
+    display: flex;
+    padding: 11px;
+    width: 1182px;
+    height: 67px;
+    border: 1px solid #757575;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+
+.fluent--add-28-filled {
+    padding-top: 5px;
+    width: 35px;
+    height: 35px;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath fill='%23000' d='M24 13h-9V4a1 1 0 1 0-2 0v9H4a1 1 0 1 0 0 2h9v9a1 1 0 1 0 2 0v-9h9a1 1 0 1 0 0-2'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+  /*license: MIT*/
+
+.sendMessage-container input {
+    flex: 1;
+    border: none;
+    padding: 10px; /* 입력 필드 내부 여백 */
+    margin: 0 10px; /* 입력 필드와 버튼 사이의 여백 */
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.sendMessage-container button {
+    width: 108px;
+    height: 42px;
+    border: 1px solid #757575;
+    background-color: #eeeeee;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.sendMessage-container button:hover {
+    background-color: #e0e0e0;
+}
+
+.chat-messages {
+    overflow-y: auto;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.chat-message-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.my-message-container {
+  justify-content: flex-end;
+  margin-right: 25px;
+}
+
+.your-message-container {
+  justify-content: flex-start;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+
+.chat-message {
+    display: inline-block;
+    max-width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #757575;
+    border-radius: 23px;
+    background-color: #ffffff;
+    margin-top: 25px;
+    word-break: break-word;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .my-message {
+    background-color: #E4E4E4;
+  }
+
+  .your-message {
+    background-color: white;
+    padding: 8px;
+    max-width: 200px;
+  }
+  
+  .chat-message-profile {
+    margin-top: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  .chat-message-username {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 9px;
+    margin-right: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+
+  }
+  
+  .chat-message-timestamp {
+    color: #000000;
+    margin-right: 10px;
+    margin-top: 40px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+  }
+
+  .your-message-timestamp {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    margin-left: 8px;
+  }
+

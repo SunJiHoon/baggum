@@ -1,9 +1,24 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
+import axios from "axios";
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
+  const baseUrl = process.env.REACT_APP_BASE_URL;
 
+  const onClickHandler = () => {
+    axios.get(`${baseUrl}/api/users/logout`, { withCredentials: true })
+    .then(response => {
+      console.log(response.data);
+      if (response.data.success === true){
+        window.location.reload();
+        //navigate("/");
+      }
+    })
+    .catch(error => {
+      console.error('There was an error logging out!', error);
+    });
+  }
   return (
     <nav>
       <ul>
@@ -11,7 +26,11 @@ const NavBar = () => {
         <li><a href="/chat">Chat</a></li>
         {isAuthenticated ? (
           <>
-            <li><a href="/logout">Logout</a></li>
+            <li>
+              <button onClick={onClickHandler}>
+                로그아웃
+              </button>
+            </li>
             <li><a href="/mypage">MyPage</a></li>
           </>
         ) : (

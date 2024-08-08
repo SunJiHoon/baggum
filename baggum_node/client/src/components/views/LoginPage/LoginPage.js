@@ -36,8 +36,9 @@ function LoginPage() {
     dispatch(loginUser(body))
     .then(response => {
       if(response.payload.loginSuccess){
+        window.location.reload();
         // props.history.push("/login");
-        navigate("/");
+        //navigate("/");
       }else{
         alert("Failed to login");
       }

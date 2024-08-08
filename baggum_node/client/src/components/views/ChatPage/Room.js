@@ -1,64 +1,67 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import io from "socket.io-client";
-import NavBar from "../NavBar/NavBar";
-import "./Room.css";
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import io from 'socket.io-client';
+import NavBar from '../NavBar/NavBar';
+import './Room.css';
 
-const socket = io("http://localhost:5000");
+const socket = io('http://localhost:5000');
 
 const Room = () => {
   const { roomId } = useParams(); // URL에서 roomId 추출
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
-  const [userName, setUserName] = useState("User1"); // 임시 username
+  const userName = 'User1'; // 임시 사용자 이름
 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
     if (roomId) {
       // 특정 방에 참가
-      socket.emit("joinRoom", { roomId });
+      socket.emit('joinRoom', { roomId });
 
       // 메시지 수신
-      socket.on("message", (message) => {
+      socket.on('message', (message) => {
         setMessages((prevMessages) => [...prevMessages, message]);
       });
 
       return () => {
-      socket.off("message");
+        socket.off('message');
       };
     }
   }, [roomId]);
 
+  // 메세지 추가될 때마다 스크롤을 아래로 이동
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
 
+  // 메세지 리스트의 맨 아래로 스크롤하는 함수
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // 현재 시간을 문자열로 반환하는 함수
   const formatTime = (date) => {
-    const options = { hour: "2-digit", minute: "2-digit", hour12: true };
-    const timeString = date.toLocaleTimeString("en-US", options);
-    return timeString;
+    const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+    return date.toLocaleTimeString('en-US', options);
   };
 
   const sendMessage = (e) => {
     if (e) e.preventDefault();
     if (message.trim()) {
       const timestamp = formatTime(new Date());
-       socket.emit("message", { roomId, message, userName, timestamp });
+      socket.emit('message', { roomId, message, userName, timestamp });
       setMessages([
         ...messages,
         { message, userName, timestamp, isOwnMessage: true },
       ]);
-      setMessage("");
+      setMessage('');
     }
   };
 
+  // Enter 키를 눌렀을 때 메시지를 전송하는 함수
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       sendMessage(e);
     }
   };
@@ -66,59 +69,55 @@ const Room = () => {
   return (
     <div>
       <NavBar />
-      <div className="chat-container">
-        <div className="chat-NavBar">
-          <span className="solar--arrow-up-outline"></span>
-          <span className="chat-username">{userName}</span>
+      <div className='chat-container'>
+        {/* 채팅방 헤더 */}
+        <div className='chat-header'>
+          <span className='arrow-icon'></span>
+          <span className='header-username'>{userName}</span>
         </div>
-        <div className="chat-messages">
+        {/* 채팅 메세지 */}
+        <div className='chat-messages'>
           {messages.map((msg, index) => (
+            // OwnMessage 판단 후 class 지정
             <div
-              className={`chat-message-container ${
-                msg.isOwnMessage
-                  ? "my-message-container"
-                  : "your-message-container"
-              }`}
+              className={`${msg.isOwnMessage ? 'my-message-container' : 'your-message-container'}`}
               key={index}
             >
+              {/* 상대방 채팅일 때 */}
               {!msg.isOwnMessage && (
                 <>
-                  <div className="chat-message-username">
-                    <img src="/profile.png" className="chat-message-profile" />
-                    <span className="chat-message-username">
-                      {msg.userName}
-                    </span>
+                  {/* 상대방 프로필 */}
+                  <div className='chat-profile'>
+                    {/* 임시 프로필 사진 */}
+                    <img src='/profile.png' className='chat-profile-pic' />
+                    <span className='chat-username'>{msg.userName}</span>
                   </div>
-                  <div className="message-timestamp">
-                    <div className="chat-message your-message">
-                      {msg.message}
-                    </div>
-                    <span className="your-message-timestamp">
-                      {msg.timestamp}
-                    </span>
-                  </div>
+                  {/* 상대방 채팅 내용 및 시간 */}
+                  <div className='chat-message'>{msg.message}</div>
+                  <span className='chat-timestamp'>{msg.timestamp}</span>
                 </>
               )}
+              {/* 내 채팅일 때 */}
               {msg.isOwnMessage && (
                 <>
-                  <span className="chat-message-timestamp">{msg.timestamp}</span>
-                  <div className="chat-message my-message">
-                    {msg.message}
-                  </div>
+                  {/* 내 채팅 내용 및 시간 */}
+                  <span className='chat-timestamp'>{msg.timestamp}</span>
+                  <div className='chat-message my-message'>{msg.message}</div>
                 </>
               )}
             </div>
           ))}
-          <div ref={messagesEndRef} />
-        </div>
+          {/* 채팅 스크롤 지점 확인 */}
+          <div ref={messagesEndRef} /></div>
       </div>
-      <div className="sendMessage-container">
-        <span className="fluent--add-28-filled"></span>
+      {/* 채팅 입력 컨테이너 */}
+      <div className='sendMessage-container'>
+        <span className='add-icon'></span>
         <input
-          type="text"
+          type='text'
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onKeyDown={handleKeyPress}
         />
         <button onClick={sendMessage}>Send</button>
       </div>

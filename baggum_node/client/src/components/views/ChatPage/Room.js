@@ -1,34 +1,56 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
+import axios from 'axios';
 import NavBar from '../NavBar/NavBar';
 import './Room.css';
 
 const socket = io('http://localhost:5000');
 
 const Room = () => {
-  const { roomId } = useParams(); // URL에서 roomId 추출
+  const { roomNum } = useParams(); // URL에서 roomId 추출
+  const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   const userName = 'User1'; // 임시 사용자 이름
+  const [error, setError] = useState(null);
 
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    if (roomId) {
-      // 특정 방에 참가
-      socket.emit('joinRoom', { roomId });
+    const authenticateUser = async () => {
+      try {
+        const baseURL = process.env.REACT_APP_BASE_URL;
 
-      // 메시지 수신
-      socket.on('message', (message) => {
-        setMessages((prevMessages) => [...prevMessages, message]);
-      });
+        const response = await axios.get(`${baseURL}/api/chat/auth/chat`, {
+          params: { roomId: roomNum }
+        });
 
-      return () => {
-        socket.off('message');
-      };
-    }
-  }, [roomId]);
+        if (response.status === 200) {
+          // 특정 방에 참가
+          socket.emit('joinRoom', { roomId: roomNum });
+
+          // 메시지 수신
+          socket.on('message', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+          });
+        }
+      } catch (error) {
+        if (error.response && (error.response.status === 403 || error.response.status === 400)) {
+          setError('You are not authorized to enter this chat room.');
+        } else {
+          setError('An unexpected error occurred.');
+        }
+        navigate('/');
+      }
+    };
+
+    authenticateUser();
+
+    return () => {
+      socket.off('message');
+    };
+  }, [roomNum, navigate]);
 
   // 메세지 추가될 때마다 스크롤을 아래로 이동
   useEffect(() => {
@@ -50,7 +72,7 @@ const Room = () => {
     if (e) e.preventDefault();
     if (message.trim()) {
       const timestamp = formatTime(new Date());
-      socket.emit('message', { roomId, message, userName, timestamp });
+      socket.emit('message', { roomNum, message, userName, timestamp });
       setMessages([
         ...messages,
         { message, userName, timestamp, isOwnMessage: true },
@@ -65,6 +87,10 @@ const Room = () => {
       sendMessage(e);
     }
   };
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div>

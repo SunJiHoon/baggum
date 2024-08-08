@@ -6,17 +6,19 @@ import { useAuth } from '../../contexts/AuthContext';
 import NavBar from '../NavBar/NavBar';
 
 function LandingPage() {
+  // window.location.reload()
+
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/login");
-    } else {
-      // axios.get("http://localhost:5000/api/hello")
-      // axios.get("/api/hello")
-      // .then(response => console.log(response.data));
-    }
+    // if (!isAuthenticated) {
+    //   navigate("/login");
+    // } else {
+    //   // axios.get("http://localhost:5000/api/hello")
+    //   // axios.get("/api/hello")
+    //   // .then(response => console.log(response.data));
+    // }
   }, [isAuthenticated, navigate]);
 
 
@@ -26,25 +28,33 @@ function LandingPage() {
     axios.get(`${baseUrl}/api/users/logout`, { withCredentials: true })
     .then(response => {
       console.log(response.data);
-      navigate("/login");
+      if (response.data.success === true){
+        window.location.reload();
+        //navigate("/");
+      }
     })
+    .catch(error => {
+      console.error('There was an error logging out!', error);
+    });
   }
 
   return (
     <div>
-            <NavBar />
-    <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center',
-      width: '100%', height: '100vh'
-    }}>
-      <h2>시작 페이지</h2>
-      <button onClick={onClickHandler}>
-        로그아웃
-      </button>
-    </div>
-
+      <NavBar />
+      <div style={{
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        width: '100%', height: '100vh'
+      }}>
+        <h2>시작 페이지</h2>
+        {isAuthenticated && (
+          <button onClick={onClickHandler}>
+            로그아웃
+          </button>
+        )}
+      </div>
     </div>
   )
+
 }
 
 export default LandingPage

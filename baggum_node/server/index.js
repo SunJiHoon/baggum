@@ -7,7 +7,10 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: [
+      "http://localhost:3000",    // 로컬 개발 환경
+      "http://3.34.54.89:5000",    // 실제 배포된 서버
+    ],
     methods: ["GET", "POST"]
   }
 });
@@ -32,7 +35,10 @@ const cors = require('cors'); // Import the cors package
 
 const corsOptions = {
   credentials: true,
-  origin: ['http://localhost:3000',] // Whitelist the domains you want to allow
+  origin: [
+    'http://localhost:3000',
+    'http://3.34.54.89:5000',
+  ] // Whitelist the domains you want to allow
 };
 
 app.use(cors(corsOptions)); // Use the cors middleware with your options

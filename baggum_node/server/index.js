@@ -10,6 +10,7 @@ const io = socketIo(server, {
     origin: [
       "http://localhost:3000",    // 로컬 개발 환경
       "http://3.34.54.89:5000",    // 실제 배포된 서버
+      "https://baggumi.com",
     ],
     methods: ["GET", "POST"]
   }
@@ -38,6 +39,7 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://3.34.54.89:5000',
+    'https://baggumi.com',
   ] // Whitelist the domains you want to allow
 };
 

@@ -11,22 +11,22 @@ ChatHistory.init({
     autoIncrement: true,
     primaryKey: true,
   },
-  content: {
+  content: { // 채팅 내용
     type: DataTypes.STRING,
     allowNull: false,
   },
-  createdDate: {
+  createdDate: { // 채팅 전송 시각
     type: DataTypes.DATE,
     defaultValue: Sequelize.NOW,
   },
-  userId: {
+  userId: { // 채팅을 보낸 유저의 id
     type: DataTypes.INTEGER,
     references: {
       model: User,
       key: 'id',
     }
   },
-  roomId: {
+  roomId: { // 채팅이 보내진 채팅방 id
     type: DataTypes.INTEGER,
     references: {
       model: Room,

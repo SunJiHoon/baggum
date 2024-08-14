@@ -102,8 +102,8 @@ module.exports = (io) => {
     });
   
     // 방으로 메시지 보내기
-    socket.on('message', ({ roomId, message, userName, timestamp }) => {
-      socket.to(roomId).emit('message', { message, userName, timestamp });
+    socket.on('message', ({ roomId, message }) => {
+      io.to(roomId).emit('message', message);
     });
   
     socket.on('disconnect', () => {

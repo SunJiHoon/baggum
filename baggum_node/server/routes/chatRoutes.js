@@ -7,7 +7,7 @@ const socketIo = require('socket.io');
 const UserRoomMapping = require('../models/userRoomMapping');
 const Room = require('../models/Room');
 const { auth } = require('../middleware/auth');
-const { User } = require('../models/User');
+
 
 // 방 생성 라우트
 router.post('/create-room', (req, res) => {

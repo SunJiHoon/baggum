@@ -6,6 +6,7 @@ const server = http.createServer(app);
 const socketIo = require('socket.io');
 const UserRoomMapping = require('../models/userRoomMapping');
 const Room = require('../models/Room');
+const ChatHistory = require('../models/ChatHistory')
 const { auth } = require('../middleware/auth');
 
 
@@ -102,8 +103,19 @@ module.exports = (io) => {
     });
   
     // 방으로 메시지 보내기
-    socket.on('message', ({ roomId, message }) => {
+    socket.on('message', async ({ roomId, message, userId }) => {
       io.to(roomId).emit('message', message);
+
+      try { // 메시지를 ChatHistory 테이블에 저장
+        await ChatHistory.create({ 
+          content: message,
+          userId: userId,
+          roomId: roomId,
+          createDate: new Date()
+        });
+      } catch (error) {
+        console.error('Failed to save chat history: ', error);
+      }
     });
   
     socket.on('disconnect', () => {

@@ -7,7 +7,7 @@ const socketIo = require('socket.io');
 const UserRoomMapping = require('../models/userRoomMapping');
 const Room = require('../models/Room');
 const { auth } = require('../middleware/auth');
-
+const { User } = require('../models/User');
 
 // 방 생성 라우트
 router.post('/create-room', (req, res) => {
@@ -102,8 +102,8 @@ module.exports = (io) => {
     });
   
     // 방으로 메시지 보내기
-    socket.on('message', ({ roomId, message }) => {
-      io.to(roomId).emit('message', message);
+    socket.on('message', ({ roomId, message, userName, timestamp }) => {
+      socket.to(roomId).emit('message', { message, userName, timestamp });
     });
   
     socket.on('disconnect', () => {

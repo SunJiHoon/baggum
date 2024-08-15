@@ -27,6 +27,8 @@ const Room = () => {
         });
 
         if (response.status === 200) {
+          socket.off('message');
+
           // 특정 방에 참가
           socket.emit('joinRoom', { roomId: roomNum });
 

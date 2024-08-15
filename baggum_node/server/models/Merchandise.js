@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
+const { sequelize } = require('./User'); // User 모델이 정의된 파일에서 sequelize 객체 가져오기
 
 // Merchandise 모델 정의
 class Merchandise extends Model {}

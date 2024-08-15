@@ -22,7 +22,7 @@ router.get('/:id', async (req, res) => {
 router.get('/room/:id', async (req, res) => {
     try {
         const chatList = await ChatHistory.findAll({
-          where: { id: req.params.id },
+          where: { roomId: req.params.id },
           order: [['createdDate', 'ASC']], // 오름차순 정렬
          });
     
@@ -36,7 +36,7 @@ router.get('/room/:id', async (req, res) => {
 });
 
 // 전체 채팅 내역 조회
-router.get('/all', async (req, res) => {
+router.get('/find/all', async (req, res) => {
     try {
       const chatList = await ChatHistory.findAll();
       return res.status(200).json({ success: true, chatList });
@@ -44,3 +44,5 @@ router.get('/all', async (req, res) => {
       return res.status(500).json({ success: false, message: "채팅 내역 조회 실패", error: error.message });
     }
 });
+
+module.exports = router;

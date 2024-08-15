@@ -6,7 +6,8 @@ import io from 'socket.io-client';
 import NavBar from '../NavBar/NavBar';
 import config from '../config'; // config import
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io(config.baseUrl);
 
 const ChatRoom = ({ userId }) => {
   const [myId, setMyId] = useState(userId || ''); // 내 ID 상태 변수

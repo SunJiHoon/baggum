@@ -6,7 +6,8 @@ import NavBar from '../NavBar/NavBar';
 import './Room.css';
 import config from '../config'; // config 파일 import
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io(config.baseUrl);
 
 const Room = () => {
   const { roomNum } = useParams(); // URL에서 roomId 추출
@@ -31,7 +32,7 @@ const Room = () => {
           params: { roomId: roomNum }
         });
         */
-       
+
         if (response.status === 200) {
           // 특정 방에 참가
           socket.emit('joinRoom', { roomId: roomNum });

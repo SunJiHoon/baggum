@@ -5,7 +5,7 @@ import config from '../config/dev'; // config.js 파일의 경로가 현재 파�
 export function loginUser(dataToSubmit){
     console.log(dataToSubmit)
 
-    const baseUrl = process.env.REACT_APP_BASE_URL;
+    //const baseUrl = process.env.REACT_APP_BASE_URL;
     const request = axios.post(`${config.baseUrl}/api/users/login`, dataToSubmit, { withCredentials: true })
     .then(response =>  response.data )
 
@@ -19,7 +19,7 @@ export function loginUser(dataToSubmit){
 export function registerUser(dataToSubmit){
     console.log(dataToSubmit)
 
-    const baseUrl = process.env.REACT_APP_BASE_URL;
+    //const baseUrl = process.env.REACT_APP_BASE_URL;
     const request = axios.post(`${config.baseUrl}/api/users/register`, dataToSubmit, { withCredentials: true })
     .then(response =>  response.data )
 
@@ -31,7 +31,7 @@ export function registerUser(dataToSubmit){
 }
 
 export function auth(){
-    const baseUrl = process.env.REACT_APP_BASE_URL;
+    //const baseUrl = process.env.REACT_APP_BASE_URL;
     const request = axios.get(`${config.baseUrl}/api/users/auth`, { withCredentials: true })
     .then(response => response.data)
 

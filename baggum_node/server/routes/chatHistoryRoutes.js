@@ -5,7 +5,7 @@ const Room = require('../models/Room');
 const ChatHistory = require('../models/ChatHistory')
 
 // 단일 채팅 내역 id로 조회
-router.get('/read/:id', async (req, res) => {
+router.get('/chat/read/:id', async (req, res) => {
     try {
         const chat = await ChatHistory.findOne({ where: { id: req.params.id } });
     
@@ -19,7 +19,7 @@ router.get('/read/:id', async (req, res) => {
 });
 
 // 단일 채팅 내역 roomId로 조회
-router.get('/read/room/:id', async (req, res) => {
+router.get('/chat/read/room/:id', async (req, res) => {
     try {
         const chatList = await ChatHistory.findAll({
           where: { id: req.params.id },
@@ -36,7 +36,7 @@ router.get('/read/room/:id', async (req, res) => {
 });
 
 // 전체 채팅 내역 조회
-router.get('/', async (req, res) => {
+router.get('/chat/read/all', async (req, res) => {
     try {
       const chatList = await ChatHistory.findAll();
       return res.status(200).json({ success: true, chatList });

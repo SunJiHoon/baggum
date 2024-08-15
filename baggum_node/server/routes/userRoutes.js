@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { auth } = require('../middleware/auth');
 const { User } = require('../models/User');
-const UserRoomMapping = require('../models/userRoomMapping');
+const UserRoomMapping = require('../models/UserRoomMapping');
 
 router.post('/register', (req, res) => {
   const user = new User(req.body);

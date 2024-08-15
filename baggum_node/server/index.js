@@ -57,9 +57,11 @@ sequelize.sync()
 // 라우트
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes')(io);
+const merchandiseRoutes = require('./routes/merchandiseRoutes');
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/merchandise', merchandiseRoutes);
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

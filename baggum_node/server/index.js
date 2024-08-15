@@ -24,7 +24,7 @@ const cookieParser = require('cookie-parser')
 // const { auth } = require('./middleware/auth')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
 const Room = require('./models/Room');
-const UserRoomMapping = require('./models/userRoomMapping');
+const UserRoomMapping = require('./models/UserRoomMapping');
 
 
 //application/x-www-form-urlencoded
@@ -58,10 +58,12 @@ sequelize.sync()
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes')(io);
 const merchandiseRoutes = require('./routes/merchandiseRoutes');
+const chatHistoryRoutes = require('./routes/chatHistoryRoutes');
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/merchandise', merchandiseRoutes);
+app.use('/api/chat/read', chatHistoryRoutes);
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

@@ -14,6 +14,16 @@ router.get('/read/:id', async (req, res) => {
         }
         return res.status(200).json({ success: true, chat });
       } catch (error) {
-        return res.status(500).json({ success: false, message: "채팅 조회 실패", error: error.message });
+        return res.status(500).json({ success: false, message: "채팅 내역 조회 실패", error: error.message });
       }
-})
+});
+
+// 전체 채팅 내역 조회
+router.get('/', async (req, res) => {
+    try {
+      const chatList = await ChatHistory.findAll();
+      return res.status(200).json({ success: true, chatList });
+    } catch (error) {
+      return res.status(500).json({ success: false, message: "채팅 내역 조회 실패", error: error.message });
+    }
+  });

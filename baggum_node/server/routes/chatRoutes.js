@@ -107,7 +107,7 @@ module.exports = (io) => {
   
     // 방으로 메시지 보내기
     socket.on('message', async ({ roomId, message, userName, timestamp }) => {
-      socket.to(roomId).emit('message', {message, userName, timestamp} );
+      socket.to(roomId).emit('message', { message, userName, timestamp } );
 
       try { // 메시지를 ChatHistory 테이블에 저장
         console.log(userId, realRoomId);

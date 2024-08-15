@@ -5,7 +5,7 @@ const Room = require('../models/Room');
 const ChatHistory = require('../models/ChatHistory')
 
 // 단일 채팅 내역 조회
-router.get('/:id', async (req, res) => {
+router.get('/read/:id', async (req, res) => {
     try {
         const chat = await ChatHistory.findOne({ where: { id: req.params.id } });
     

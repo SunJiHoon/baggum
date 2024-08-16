@@ -1,0 +1,50 @@
+nav {
+    background-color: white; /* 배경색을 흰색으로 설정 */
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between; /* 아이콘과 링크 영역을 양쪽으로 정렬 */
+    align-items: center;
+  }
+  
+  .left-icons,
+  .right-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-icons li,
+  .right-links li {
+    margin-right: 20px;
+  }
+  
+  .right-links li:last-child {
+    margin-right: 0;
+  }
+  
+  nav ul li a,
+  nav ul li button {
+    color: black; /* 텍스트 색상 검정으로 변경 */
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 15px;
+    display: inline-block;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  nav ul li a:hover,
+  nav ul li button:hover {
+    background-color: #f1f1f1; /* 호버 시 배경색 약간 회색으로 변경 */
+  }
+  
+  nav ul li a:active,
+  nav ul li button:active {
+    background-color: #e1e1e1; /* 클릭 시 배경색 좀 더 진하게 */
+  }

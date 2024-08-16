@@ -15,6 +15,7 @@ import ChatPage from "./components/views/ChatPage/ChatPage";
 import ChatRoom from "./components/views/ChatPage/ChatRoom";
 import Room from "./components/views/ChatPage/Room";
 import SetChatRoom from './components/views/ChatPage/SetChatRoom';
+import MyChatRoom from "./components/views/ChatPage/MyChatPage";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           
           <Route exact path="/chat/room" element={<ChatRoom />} />
           <Route exact path="/chat/room/:roomId" element={<Room />} />
+          <Route exact path="/chat/my" element={<MyChatRoom />} />
 
           <Route exact path="/admin/setChatRoom" element={<SetChatRoom  />} />
 

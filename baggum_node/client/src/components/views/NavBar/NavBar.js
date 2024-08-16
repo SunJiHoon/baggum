@@ -29,6 +29,7 @@ const NavBar = () => {
         </div>
         <div class="right-links">
           <li><a href="/">Home</a></li>
+          <li><a href="/items">Items</a></li>
           <li><a href="/chat">Chat</a></li>
           {isAuthenticated ? (
             <>

@@ -12,6 +12,7 @@ const io = socketIo(server, {
       "http://3.34.54.89:5000",    // 실제 배포된 서버
       "https://baggumi.com",
       "https://api.baggumi.com",
+      "http://localhost:5000",    // 로컬 개발 환경
     ],
     methods: ["GET", "POST"]
   }
@@ -38,7 +39,8 @@ const cors = require('cors'); // Import the cors package
 const corsOptions = {
   credentials: true,
   origin: [
-    'http://localhost:3000',
+    'http://localhost:3000',    
+    'http://localhost:5000',
     'http://3.34.54.89:5000',
     'https://baggumi.com',
     'https://api.baggumi.com',

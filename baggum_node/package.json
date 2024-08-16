@@ -25,6 +25,7 @@
     "mysql2": "^3.10.3",
     "sequelize": "^6.37.3",
     "socket.io": "^4.7.5",
+    "styled-components": "^6.1.12",
     "ws": "^8.18.0"
   },
   "devDependencies": {

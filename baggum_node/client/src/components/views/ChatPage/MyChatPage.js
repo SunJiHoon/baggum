@@ -1,5 +1,5 @@
 import React from 'react';
-import './MyChatPage.css';
+import './MyChatPage.module.css';
 import NavBar from '../NavBar/NavBar';
 
 const MyChatPage = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import './MyChatPage.module.css';
+import './MyChatPage.css';
 import NavBar from '../NavBar/NavBar';
 
 const MyChatPage = () => {
@@ -10,6 +10,7 @@ const MyChatPage = () => {
   ];
 
   return (
+    <myChat>
     <div>
         <NavBar />
     <div className="chat-container">
@@ -28,6 +29,7 @@ const MyChatPage = () => {
       ))}
     </div>
     </div>
+    </myChat>
   );
 }
 

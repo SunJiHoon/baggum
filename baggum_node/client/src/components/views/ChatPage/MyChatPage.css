@@ -1,4 +1,4 @@
-.chat-container {
+myChat .chat-container {
     width: 400px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -7,27 +7,27 @@
     font-family: Arial, sans-serif;
   }
   
-  .chat-message {
+  myChat  .chat-message {
     display: flex;
     flex-direction: column;
     padding: 8px 0;
     border-bottom: 1px solid #eee;
   }
   
-  .user-info {
+  myChat  .user-info {
     display: flex;
     align-items: center;
   }
   
-  .user-icon {
+  myChat  .user-icon {
     margin-right: 8px;
   }
   
-  .user-name {
+  myChat  .user-name {
     font-weight: bold;
   }
   
-  .unread-count {
+  myChat  .unread-count {
     margin-left: auto;
     background-color: red;
     color: white;
@@ -36,16 +36,16 @@
     font-size: 12px;
   }
   
-  .message-content {
+  myChat  .message-content {
     margin-left: 24px;
   }
   
-  .message-text {
+  myChat  .message-text {
     display: block;
     margin-bottom: 4px;
   }
   
-  .message-time {
+  myChat  .message-time {
     color: #888;
     font-size: 12px;
   }

@@ -4,8 +4,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import NavBar from '../NavBar/NavBar';
+import config from '../config'; // config import
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io(config.baseUrl);
 
 const ChatRoom = ({ userId }) => {
   const [myId, setMyId] = useState(userId || ''); // 내 ID 상태 변수
@@ -24,9 +26,10 @@ const ChatRoom = ({ userId }) => {
 
   const createRoom = async () => {
     try {
-      const baseURL = process.env.REACT_APP_BASE_URL;
+      //const baseURL = process.env.REACT_APP_BASE_URL;
 
-      const response = await axios.post(`${baseURL}/api/chat/create-room`);
+      //const response = await axios.post(`${baseURL}/api/chat/create-room`);
+      const response = await axios.post(`${config.baseUrl}/api/chat/create-room`);
       const roomId = response.data.roomId;
       
       // UserRoomMapping 테이블에 저장 요청

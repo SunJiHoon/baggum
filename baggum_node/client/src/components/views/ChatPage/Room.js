@@ -4,8 +4,10 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import NavBar from '../NavBar/NavBar';
 import './Room.css';
+import config from '../config'; // config 파일 import
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io(config.baseUrl);
 
 const Room = () => {
   const { roomNum } = useParams(); // URL에서 roomId 추출
@@ -22,9 +24,14 @@ const Room = () => {
       try {
         const baseURL = process.env.REACT_APP_BASE_URL;
 
+        const response = await axios.get(`${config.baseUrl}/api/chat/auth/chat`, {
+          params: { roomId: roomNum }
+        });
+        /*
         const response = await axios.get(`${baseURL}/api/chat/auth/chat`, {
           params: { roomId: roomNum }
         });
+        */
 
         if (response.status === 200) {
           socket.off('message');

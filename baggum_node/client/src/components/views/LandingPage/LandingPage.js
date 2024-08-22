@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import NavBar from '../NavBar/NavBar';
+import config from '../config'; // config import
 
 function LandingPage() {
   // window.location.reload()
@@ -25,7 +26,7 @@ function LandingPage() {
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const onClickHandler = () => {
-    axios.get(`${baseUrl}/api/users/logout`, { withCredentials: true })
+    axios.get(`${config.baseUrl}/api/users/logout`, { withCredentials: true })
     .then(response => {
       console.log(response.data);
       if (response.data.success === true){

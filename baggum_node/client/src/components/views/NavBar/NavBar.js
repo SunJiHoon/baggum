@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import axios from "axios";
 // <<<<<<< 30-bug-fix-env-code-fix
-import config from '../config'; // config import
+import config from '../../../config/dev'; // config import
 // =======
 import './NavBar.css';
 // >>>>>>> main

@@ -1,7 +1,7 @@
 // SetChatRoom.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import config from '../config'; // config import
+import config from '../../../config/dev'; // config import
 
 const SetChatRoom = () => {
   const [userId1, setUserId1] = useState('');

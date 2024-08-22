@@ -4,10 +4,10 @@ import io from 'socket.io-client';
 import axios from 'axios';
 import NavBar from '../NavBar/NavBar';
 import './Room.css';
-import config from '../config'; // config 파일 import
+import config from '../../../config/dev'; // config 파일 import
 
 //const socket = io('http://localhost:5000');
-const socket = io(config.baseUrl);
+const socket = io(`${config.baseUrl}`);
 
 const Room = () => {
   const { roomNum } = useParams(); // URL에서 roomId 추출

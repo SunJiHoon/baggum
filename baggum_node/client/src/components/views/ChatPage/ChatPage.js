@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import NavBar from '../NavBar/NavBar';
-import config from '../config'; // config import
+import config from '../../../config/dev'; // config import
 
 //const socket = io('http://localhost:5000');
 const socket = io(config.baseUrl);

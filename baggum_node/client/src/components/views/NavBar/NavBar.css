@@ -39,3 +39,9 @@ nav {
   nav ul li button:active {
     background-color: #e1e1e1; /* 클릭 시 배경색 좀 더 진하게 */
   }
+
+  nav .img-small {
+    width: 50px;
+    height: 50px;
+  }
+  

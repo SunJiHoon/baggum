@@ -17,16 +17,7 @@ nav {
     display: flex;
     align-items: center;
   }
-  
-  .left-icons li,
-  .right-links li {
-    margin-right: 20px;
-  }
-  
-  .right-links li:last-child {
-    margin-right: 0;
-  }
-  
+
   nav ul li a,
   nav ul li button {
     color: black; /* 텍스트 색상 검정으로 변경 */

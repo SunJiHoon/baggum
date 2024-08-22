@@ -23,11 +23,11 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <div class="left-icons">
+        <div className="left-icons">
           <li><a href="#iconA"><img src="iconA.png" alt="Icon A"></img></a></li>
           <li><a href="#iconB"><img src="iconB.png" alt="Icon B"></img></a></li>
         </div>
-        <div class="right-links">
+        <div className="right-links">
           <li><a href="/">Home</a></li>
           <li><a href="/items">Items</a></li>
           <li><a href="/chat">Chat</a></li>

@@ -1,19 +1,23 @@
-body {
+roomMain {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 100px);
+  min-width: 320px;
   background-color: #ffffff;
 }
 
-.chat-container {
+roomMain .chat-container {
   display: flex;
   flex-direction: column;
-  width: 1182px;
-  height: 585px;
+  width: 90%;
+  max-width: 1182px;
+  height: 80%;
+  max-height: 585px;
   background-color: #EDF6E9;
   border: 1px solid #757575;
-  border-radius: 8px; 
+  border-radius: 8px;
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
   margin-bottom: 32px;
   font-family: 'Noto Sans KR', sans-serif;
@@ -21,7 +25,7 @@ body {
 }
 
 /* 채팅방 헤더 */
-.chat-header {
+roomMain .chat-header {
   position: relative;
   flex-shrink: 0;
   display: flex;
@@ -32,7 +36,7 @@ body {
   border-bottom: 1px solid #757575;
   border-radius: 8px;
 }
-.arrow-icon {
+roomMain .arrow-icon {
   position: absolute;
   left: 10px;
   display: inline-block;
@@ -49,76 +53,78 @@ body {
   color: rgb(0, 0, 0);
   transform: rotate(-90deg); 
 }
-/*solar--arrow-up-outline, license: CC BY 4.0*/
-.header-username {
+roomMain .header-username {
   font-size: 20px;
 }
 
 /* 채팅 메세지 컨테이너 */
-.chat-messages {
+roomMain .chat-messages {
   overflow-y: auto;
-  margin-bottom: 20px;
+  margin: 10px 0 10px 0;
   font-size: 16px;
 }
-.my-message-container {
+roomMain .my-message-container {
   display: flex;
   justify-content: flex-end;
   margin-right: 25px;
 }
-.your-message-container {
+roomMain .your-message-container {
   display: flex;
   justify-content: flex-start;
   margin-left: 25px;
 }
 
 /* 상대방 프로필 */
-.chat-profile {
+roomMain .chat-profile {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   margin-right: 15px;
-  font-size: 14px;
 }
-.chat-profile-pic {
+roomMain .chat-profile-pic {
   width: 45px;
   height: 45px;
   border-radius: 100px;
 }
-.chat-username {
+roomMain .chat-username {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 14px;
 }
   
 /* 채팅 내용 및 시간 */
-.chat-message {
-  max-width: 80%;
+roomMain .chat-message {
+  max-width: 50%;
   padding: 10px;
   background-color: #ffffff;
   border: 1px solid #757575;
   border-radius: 23px;
   margin-top: 25px;
+  overflow-wrap: break-word;
 }
-.my-message {
+roomMain .my-message {
   background-color: #E4E4E4;
 }
-.chat-timestamp {
+roomMain .chat-timestamp {
   align-content: flex-end;
   font-size: 13px;
 }
 
 /* 채팅 입력 컨테이너 */
-.sendMessage-container {
+roomMain .sendMessage-container {
   display: flex;
+  align-items: center;
   padding: 11px;
-  width: 1182px;
+  width: 90%;
+  max-width: 1182px;
   height: 67px;
   border: 1px solid #757575;
   border-radius: 10px;
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
 }
-.sendMessage-container input {
+roomMain .sendMessage-container input {
   flex: 1;
   border: none;
   outline: none;
@@ -128,10 +134,9 @@ body {
   font-weight: 400;
   font-size: 16px;
 }
-.sendMessage-container button {
+roomMain .sendMessage-container button {
   width: 108px;
   height: 42px;
-  margin-right: 10px;
   background-color: #eeeeee;
   border: 1px solid #757575;
   border-radius: 10px;
@@ -140,9 +145,10 @@ body {
   font-size: 20px;
   cursor: pointer;
 }
-.add-icon {
-  margin-left: 10px;
-  padding-top: 5px;
+roomMain .add-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
   width: 35px;
   height: 35px;
   --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath fill='%23000' d='M24 13h-9V4a1 1 0 1 0-2 0v9H4a1 1 0 1 0 0 2h9v9a1 1 0 1 0 2 0v-9h9a1 1 0 1 0 0-2'/%3E%3C/svg%3E");
@@ -154,4 +160,139 @@ body {
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-/*fluent--add-28-filled, license: MIT*/
+
+@media (max-width: 900px) {
+  roomMain .chat-container {
+    margin-bottom: 26px; 
+    /* 32px */
+  }
+  roomMain .arrow-icon,
+  roomMain .add-icon {
+    width: 30px;
+    height: 30px;
+    /* 38px */
+  }
+  roomMain .header-username {
+    font-size: 17px;
+    /* 20px */
+  }
+  roomMain .chat-messages {
+    font-size: 13px;
+    /* 16px */
+  }
+  roomMain .my-message-container {
+    margin-right: 18px;
+    /* 25px */
+  }
+  roomMain .your-message-container {
+    margin-left: 18px;
+    /* 25px */
+  }
+  roomMain .chat-profile {
+    margin-right: 10px;
+    /* 15px */
+  }
+  roomMain .chat-profile-pic {
+    width: 38px;
+    height: 38px;
+    /* 45px */
+  }
+  roomMain .chat-username {
+    font-size: 12px;
+    /* 14px */
+  }
+  roomMain .chat-timestamp {
+    font-size: 11px;
+    /* 13px */
+  }
+  roomMain .sendMessage-container {
+    height: 60px;
+    /* 67px */
+  }
+  roomMain .sendMessage-container input {
+    font-size: 14px;
+    /* 16px */
+  }
+  roomMain .sendMessage-container button {
+    width: 90px;
+    height: 38px;
+    font-size: 18px;
+    /* 100, 42px */
+    /* 20px */
+  }
+}
+
+@media (max-width: 600px) {
+  roomMain .chat-container {
+    margin-bottom: 20px; 
+    /* 26px
+    32px */
+  }
+  roomMain .arrow-icon,
+  roomMain .add-icon {
+    width: 25px;
+    height: 25px;
+    /* 30px
+    38px */
+  }
+  roomMain .header-username {
+    font-size: 14px;
+    /* 17px
+    20px */
+  }
+  roomMain .chat-messages {
+    font-size: 11px;
+    /* 13px
+    16px */
+  }
+  roomMain .my-message-container {
+    margin-right: 10px;
+    /* 18px
+    25px */
+  }
+  roomMain .your-message-container {
+    margin-left: 10px;
+    /* 18px
+    25px */
+  }
+  roomMain .chat-profile {
+    margin-right: 5px;
+    /* 10px
+    15px */
+  }
+  roomMain .chat-profile-pic {
+    width: 34px;
+    height: 34px;
+    /* 38px
+    45px */
+  }
+  roomMain .chat-username {
+    font-size: 10px;
+    /* 12px
+    14px */
+  }
+  roomMain .chat-timestamp {
+    font-size: 9px;
+    /* 11px
+    13px */
+  }
+  roomMain .sendMessage-container {
+    height: 55px;
+    /* 60px
+    67px */
+  }
+  roomMain .sendMessage-container input {
+    font-size: 12px;
+    /* 14px
+    16px */
+  }
+  roomMain .sendMessage-container button {
+    width: 80px;
+    height: 35px;
+    font-size: 16px;
+    /* 90px, 38px
+    100, 42px */
+    /* 18px
+    20px */
+  }
+}

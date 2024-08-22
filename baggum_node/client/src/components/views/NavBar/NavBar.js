@@ -1,7 +1,11 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import axios from "axios";
+// <<<<<<< 30-bug-fix-env-code-fix
 import config from '../config'; // config import
+// =======
+import './NavBar.css';
+// >>>>>>> main
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
@@ -23,23 +27,31 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/chat">Chat</a></li>
-        {isAuthenticated ? (
-          <>
-            <li>
-              <button onClick={onClickHandler}>
-                로그아웃
-              </button>
-            </li>
-            <li><a href="/mypage">MyPage</a></li>
-          </>
-        ) : (
-          <>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/mypage">MyPage</a></li>
-          </>
-        )}
+        <div className="left-icons">
+          <li><a href="#icon0"><img src="/images/alarm.png" alt="Icon 0" class="img-small"></img></a></li>
+          <li><a href="#iconA"><img src="/images/baggumLogo_1.png" alt="Icon A" class="img-small"></img></a></li>
+          <li><a href="#iconB"><img src="images/baggumLogo_2.png" alt="Icon B" class="img-small"></img></a></li>
+        </div>
+        <div className="right-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/items">Items</a></li>
+          <li><a href="/chat">Chat</a></li>
+          {isAuthenticated ? (
+            <>
+              <li>
+                <button onClick={onClickHandler}>
+                  Logout
+                </button>
+              </li>
+              <li><a href="/mypage">MyPage</a></li>
+            </>
+          ) : (
+            <>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/mypage">MyPage</a></li>
+            </>
+          )}
+        </div>
       </ul>
     </nav>
   );

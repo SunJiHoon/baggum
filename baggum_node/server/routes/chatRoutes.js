@@ -4,10 +4,13 @@ const http = require('http'); // <-- http 모듈을 불러옵니다.
 const app = express();
 const server = http.createServer(app);
 const socketIo = require('socket.io');
-const UserRoomMapping = require('../models/userRoomMapping');
+const UserRoomMapping = require('../models/UserRoomMapping');
 const Room = require('../models/Room');
+const ChatHistory = require('../models/ChatHistory')
 const { auth } = require('../middleware/auth');
 
+var userId;
+var realRoomId;
 
 // 방 생성 라우트
 router.post('/create-room', (req, res) => {
@@ -21,6 +24,7 @@ router.post('/admin/setChatRoom', async (req, res) => {
   console.log(userId1)
   console.log(userId2)
   console.log(roomName)
+  userId = userId1;
   
   if (!userId1 || !userId2 || !roomName) {
     return res.status(400).json({ error: 'userId1, userId2, and roomName are required' });
@@ -35,7 +39,7 @@ router.post('/admin/setChatRoom', async (req, res) => {
       room = await Room.create({ name: roomName });
     }
 
-    const realRoomId = room.id; // 찾은 또는 새로 생성한 방의 id
+    realRoomId = room.id; // 찾은 또는 새로 생성한 방의 id
 
     // UserRoomMapping에 유저 추가
     await UserRoomMapping.create({ userId: userId1, roomId: realRoomId });
@@ -51,8 +55,8 @@ router.post('/admin/setChatRoom', async (req, res) => {
 
 
 router.get('/auth/chat', auth, async (req, res) => {
-  const { roomId } = req.query; // roomId는 Room 모델의 name을 의미
-  const userId = req.user.id;
+  roomId = req.query; // roomId는 Room 모델의 name을 의미
+  userId = req.user.id;
 
   if (!roomId) {
     return res.status(400).json({ error: 'roomId is required' });
@@ -102,8 +106,20 @@ module.exports = (io) => {
     });
   
     // 방으로 메시지 보내기
-    socket.on('message', ({ roomId, message }) => {
-      io.to(roomId).emit('message', message);
+    socket.on('message', async ({ roomId, message, userName, timestamp }) => {
+      socket.to(roomId).emit('message', { message, userName, timestamp } );
+
+      try { // 메시지를 ChatHistory 테이블에 저장
+        console.log(userId, realRoomId);
+        await ChatHistory.create({ 
+          content: message,
+          userId: userId,
+          roomId: realRoomId,
+          createDate: new Date()
+        });
+      } catch (error) {
+        console.error('Failed to save chat history: ', error);
+      }
     });
   
     socket.on('disconnect', () => {

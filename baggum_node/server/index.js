@@ -12,6 +12,7 @@ const io = socketIo(server, {
       "http://3.34.54.89:5000",    // 실제 배포된 서버
       "https://baggumi.com",
       "https://api.baggumi.com",
+      "http://localhost:5000",    // 로컬 개발 환경
     ],
     methods: ["GET", "POST"]
   }
@@ -24,7 +25,7 @@ const cookieParser = require('cookie-parser')
 // const { auth } = require('./middleware/auth')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
 const Room = require('./models/Room');
-const UserRoomMapping = require('./models/userRoomMapping');
+const UserRoomMapping = require('./models/UserRoomMapping');
 
 
 //application/x-www-form-urlencoded
@@ -38,7 +39,8 @@ const cors = require('cors'); // Import the cors package
 const corsOptions = {
   credentials: true,
   origin: [
-    'http://localhost:3000',
+    'http://localhost:3000',    
+    'http://localhost:5000',
     'http://3.34.54.89:5000',
     'https://baggumi.com',
     'https://api.baggumi.com',
@@ -57,9 +59,13 @@ sequelize.sync()
 // 라우트
 const userRoutes = require('./routes/userRoutes');
 const chatRoutes = require('./routes/chatRoutes')(io);
+const merchandiseRoutes = require('./routes/merchandiseRoutes');
+const chatHistoryRoutes = require('./routes/chatHistoryRoutes');
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/merchandise', merchandiseRoutes);
+app.use('/api/chat/read', chatHistoryRoutes);
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

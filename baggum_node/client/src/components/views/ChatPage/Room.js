@@ -34,6 +34,8 @@ const Room = () => {
         */
 
         if (response.status === 200) {
+          socket.off('message');
+
           // 특정 방에 참가
           socket.emit('joinRoom', { roomId: roomNum });
 
@@ -102,58 +104,60 @@ const Room = () => {
   return (
     <div>
       <NavBar />
-      <div className='chat-container'>
-        {/* 채팅방 헤더 */}
-        <div className='chat-header'>
-          <span className='arrow-icon'></span>
-          <span className='header-username'>{userName}</span>
+      <roomMain>
+        <div className='chat-container'>
+          {/* 채팅방 헤더 */}
+          <div className='chat-header'>
+            <span className='arrow-icon'></span>
+            <span className='header-username'>{userName}</span>
+          </div>
+          {/* 채팅 메세지 */}
+          <div className='chat-messages'>
+            {messages.map((msg, index) => (
+              // OwnMessage 판단 후 class 지정
+              <div
+                className={`${msg.isOwnMessage ? 'my-message-container' : 'your-message-container'}`}
+                key={index}
+              >
+                {/* 상대방 채팅일 때 */}
+                {!msg.isOwnMessage && (
+                  <>
+                    {/* 상대방 프로필 */}
+                    <div className='chat-profile'>
+                      {/* 임시 프로필 사진 */}
+                      <img src='/profile.png' className='chat-profile-pic' />
+                      <span className='chat-username'>{msg.userName}</span>
+                    </div>
+                    {/* 상대방 채팅 내용 및 시간 */}
+                    <div className='chat-message'>{msg.message}</div>
+                    <span className='chat-timestamp'>{msg.timestamp}</span>
+                  </>
+                )}
+                {/* 내 채팅일 때 */}
+                {msg.isOwnMessage && (
+                  <>
+                    {/* 내 채팅 내용 및 시간 */}
+                    <span className='chat-timestamp'>{msg.timestamp}</span>
+                    <div className='chat-message my-message'>{msg.message}</div>
+                  </>
+                )}
+              </div>
+            ))}
+            {/* 채팅 스크롤 지점 확인 */}
+            <div ref={messagesEndRef} /></div>
         </div>
-        {/* 채팅 메세지 */}
-        <div className='chat-messages'>
-          {messages.map((msg, index) => (
-            // OwnMessage 판단 후 class 지정
-            <div
-              className={`${msg.isOwnMessage ? 'my-message-container' : 'your-message-container'}`}
-              key={index}
-            >
-              {/* 상대방 채팅일 때 */}
-              {!msg.isOwnMessage && (
-                <>
-                  {/* 상대방 프로필 */}
-                  <div className='chat-profile'>
-                    {/* 임시 프로필 사진 */}
-                    <img src='/profile.png' className='chat-profile-pic' />
-                    <span className='chat-username'>{msg.userName}</span>
-                  </div>
-                  {/* 상대방 채팅 내용 및 시간 */}
-                  <div className='chat-message'>{msg.message}</div>
-                  <span className='chat-timestamp'>{msg.timestamp}</span>
-                </>
-              )}
-              {/* 내 채팅일 때 */}
-              {msg.isOwnMessage && (
-                <>
-                  {/* 내 채팅 내용 및 시간 */}
-                  <span className='chat-timestamp'>{msg.timestamp}</span>
-                  <div className='chat-message my-message'>{msg.message}</div>
-                </>
-              )}
-            </div>
-          ))}
-          {/* 채팅 스크롤 지점 확인 */}
-          <div ref={messagesEndRef} /></div>
-      </div>
-      {/* 채팅 입력 컨테이너 */}
-      <div className='sendMessage-container'>
-        <span className='add-icon'></span>
-        <input
-          type='text'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyPress}
-        />
-        <button onClick={sendMessage}>Send</button>
-      </div>
+        {/* 채팅 입력 컨테이너 */}
+        <div className='sendMessage-container'>
+          <span className='add-icon'></span>
+          <input
+            type='text'
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={handleKeyPress}
+          />
+          <button onClick={sendMessage}>Send</button>
+        </div>
+      </roomMain>
     </div>
   );
 };

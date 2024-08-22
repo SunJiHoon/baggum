@@ -16,6 +16,9 @@ import ChatRoom from "./components/views/ChatPage/ChatRoom";
 import Room from "./components/views/ChatPage/Room";
 import SetChatRoom from './components/views/ChatPage/SetChatRoom';
 import MyChatRoom from "./components/views/ChatPage/MyChatPage";
+import ItemsPage from './components/views/ItemPage/ItemPage';
+import ItemDetail from './components/views/ItemPage/ItemDetail';
+import NewItem from './components/views/ItemPage/NewItem';
 
 
 function App() {
@@ -36,8 +39,9 @@ function App() {
           <Route exact path="/chat/room/:roomId" element={<Room />} />
           <Route exact path="/chat/my" element={<MyChatRoom />} />
 
-          <Route exact path="/admin/setChatRoom" element={<SetChatRoom  />} />
-
+          <Route path="/items" element={<ItemsPage />} />
+        <Route path="/items/:id" element={<ItemDetail />} />
+        <Route path="/items/new" element={<NewItem />} />
         </Routes>
       </div>
     </BrowserRouter>

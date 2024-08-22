@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import axios from "axios";
+import './NavBar.css';
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
@@ -22,23 +23,30 @@ const NavBar = () => {
   return (
     <nav>
       <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/chat">Chat</a></li>
-        {isAuthenticated ? (
-          <>
-            <li>
-              <button onClick={onClickHandler}>
-                로그아웃
-              </button>
-            </li>
-            <li><a href="/mypage">MyPage</a></li>
-          </>
-        ) : (
-          <>
-            <li><a href="/login">Login</a></li>
-            <li><a href="/mypage">MyPage</a></li>
-          </>
-        )}
+        <div className="left-icons">
+          <li><a href="#iconA"><img src="iconA.png" alt="Icon A"></img></a></li>
+          <li><a href="#iconB"><img src="iconB.png" alt="Icon B"></img></a></li>
+        </div>
+        <div className="right-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/items">Items</a></li>
+          <li><a href="/chat">Chat</a></li>
+          {isAuthenticated ? (
+            <>
+              <li>
+                <button onClick={onClickHandler}>
+                  로그아웃
+                </button>
+              </li>
+              <li><a href="/mypage">MyPage</a></li>
+            </>
+          ) : (
+            <>
+              <li><a href="/login">Login</a></li>
+              <li><a href="/mypage">MyPage</a></li>
+            </>
+          )}
+        </div>
       </ul>
     </nav>
   );

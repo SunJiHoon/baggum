@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar';
 import config from '../../../config/dev'; // config import
 
 //const socket = io('http://localhost:5000');
-const socket = io(config.baseUrl);
+const socket = io(`${config.baseUrl}`);
 
 function ChatPage() {
   const [message, setMessage] = useState('');

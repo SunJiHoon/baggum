@@ -1,15 +1,11 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import axios from "axios";
-// <<<<<<< 30-bug-fix-env-code-fix
 import config from '../../../config/dev'; // config import
-// =======
 import './NavBar.css';
-// >>>>>>> main
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
-  //const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const onClickHandler = () => {
     axios.get(`${config.baseUrl}/api/users/logout`, { withCredentials: true })

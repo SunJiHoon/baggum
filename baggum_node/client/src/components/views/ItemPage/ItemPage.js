@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import CategoryBar from '../CategoryBar/CategoryBar';
 
 function ItemsPage() {
   const [items, setItems] = useState([]);
@@ -21,7 +22,7 @@ function ItemsPage() {
   return (
     <div>
       <NavBar />
-
+      <CategoryBar />
       <div>
         {/* <h1>Items</h1> */}
         <div 

@@ -6,10 +6,8 @@
   "scripts": {
     "start": "node server/index.js",
     "backend": "nodemon server/index.js",
-    "backend2": "pm2 server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "devv": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "devv2": "concurrently \"npm run backend2\" \"npm run start --prefix client2\"",
     "chatServer": "node server/server.js"
   },
   "author": "",
@@ -25,7 +23,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.4",
     "mysql2": "^3.10.3",
-    "nodemailer": "^6.9.14",
     "sequelize": "^6.37.3",
     "socket.io": "^4.7.5",
     "ws": "^8.18.0"

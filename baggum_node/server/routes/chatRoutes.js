@@ -21,9 +21,9 @@ router.post('/create-room', (req, res) => {
 // 방을 추가하고 유저를 방에 추가하는 라우트
 router.post('/admin/setChatRoom', async (req, res) => {
   const { userId1, userId2, roomName } = req.body; // roomName은 Room 모델의 name
-  console.log(userId1)
-  console.log(userId2)
-  console.log(roomName)
+  // console.log(userId1)
+  // console.log(userId2)
+  // console.log(roomName)
   userId = userId1;
   
   if (!userId1 || !userId2 || !roomName) {

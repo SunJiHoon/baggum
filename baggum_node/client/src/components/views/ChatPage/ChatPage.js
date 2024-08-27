@@ -28,7 +28,7 @@ function ChatPage() {
   return (
     <div>
       <NavBar />
-      <h1>Chat Rooma</h1>
+      <h1>Chat Room</h1>
       <div>
         {messages.map((msg, index) => (
           <div key={index}>{msg}</div>

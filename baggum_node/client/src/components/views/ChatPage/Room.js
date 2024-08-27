@@ -6,6 +6,7 @@ import NavBar from '../NavBar/NavBar';
 import './Room.css';
 import config from '../../../config/dev'; // config 파일 import
 import { useAuth } from '../../contexts/AuthContext'; // 실제 경로로 수정
+// import { useChatAuth } from '../../contexts/ChatAuthContext'; // ChatAuthContext import
 
 //const socket = io('http://localhost:5000');
 const socket = io(`${config.baseUrl}`);
@@ -19,7 +20,8 @@ const Room = () => {
   const [error, setError] = useState(null);
 
   const messagesEndRef = useRef(null);
-  const { checkChatRoomAuth, isAuthenticatedInChat, loading, user } = useAuth();
+  const { loading, user } = useAuth();
+  // const { isAuthenticatedInChat, checkChatRoomAuth } = useChatAuth(); // ChatAuthContext에서 필요한 값과 함수 가져오기
 
 
   useEffect(() => {
@@ -33,11 +35,14 @@ const Room = () => {
           }
         });
         const currentUserId = currentUserIdResponse.data.userId;
-    
-        await checkChatRoomAuth(roomId, currentUserId);
+
+      const response = await axios.get(`${config.baseUrl}/api/chat/auth/chat`, {
+        params: { roomId, userId: currentUserId },
+        withCredentials: true,
+      });
 
         if (!loading) {
-          if (isAuthenticatedInChat) {
+          if (response.status === 200) {
             console.log("인증성공");
             socket.off('message');
 
@@ -49,7 +54,7 @@ const Room = () => {
               setMessages((prevMessages) => [...prevMessages, message]);
             });
           } else {
-            console.log(isAuthenticatedInChat);
+            // console.log(isAuthenticatedInChat);
             console.log("인증실패");
             // throw new Error('Unauthorized'); // 인증 실패 시 에러 발생
           }

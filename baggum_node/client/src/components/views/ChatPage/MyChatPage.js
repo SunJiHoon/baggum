@@ -14,17 +14,18 @@ const MyChatPage = () => {
     <div>
         <NavBar />
     <div className="chat-container">
+      <span className='chat-header'></span>      
       {messages.map((msg, index) => (
         <div key={index} className="chat-message">
           <div className="user-info">
-            <span className="user-icon">👤</span>
-            <span className="user-name">{msg.user}</span>
+          <img className="user-icon" src="/images/profile.png" alt="User Icon" />
+            <div className="user-details">
+              <span className="user-name">{msg.user}</span>
+              <span className="message-text">{msg.message}</span>
+            </div>
             {msg.unreadCount > 0 && <span className="unread-count">{msg.unreadCount}</span>}
           </div>
-          <div className="message-content">
-            <span className="message-text">{msg.message}</span>
-            <span className="message-time">{msg.time}</span>
-          </div>
+          <span className="message-time">{msg.time}</span>
         </div>
       ))}
     </div>

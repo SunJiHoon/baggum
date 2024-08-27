@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import NavBar from '../NavBar/NavBar';
+import config from '../../../config/dev'; // config import
 
-const socket = io('http://localhost:5000');
+//const socket = io('http://localhost:5000');
+const socket = io(`${config.baseUrl}`);
 
 function ChatPage() {
   const [message, setMessage] = useState('');
@@ -26,7 +28,7 @@ function ChatPage() {
   return (
     <div>
       <NavBar />
-      <h1>Chat Rooma</h1>
+      <h1>Chat Room</h1>
       <div>
         {messages.map((msg, index) => (
           <div key={index}>{msg}</div>

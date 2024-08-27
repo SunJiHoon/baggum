@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import config from '../../config/dev'; // config import
 
 const AuthContext = createContext();
 
@@ -13,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/api/users/auth`, { withCredentials: true });
+        const response = await axios.get(`${config.baseUrl}/api/users/auth`, { withCredentials: true });
         setAuthState({
           isAuthenticated: response.data.isAuth,
           user: response.data,

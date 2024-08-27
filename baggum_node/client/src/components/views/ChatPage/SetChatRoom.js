@@ -1,6 +1,7 @@
 // SetChatRoom.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../../../config/dev'; // config import
 
 const SetChatRoom = () => {
   const [userId1, setUserId1] = useState('');
@@ -17,9 +18,10 @@ const SetChatRoom = () => {
     }
 
     try {
-        const baseURL = process.env.REACT_APP_BASE_URL;
+      //const baseURL = process.env.REACT_APP_BASE_URL;
 
-      const response = await axios.post(`${baseURL}/admin/setChatRoom`, { userId1, userId2, roomId });
+      //const response = await axios.post(`${baseURL}/admin/setChatRoom`, { userId1, userId2, roomId });
+      const response = await axios.post(`${config.baseUrl}/admin/setChatRoom`, { userId1, userId2, roomId });
       setMessage(response.data.message);
     } catch (error) {
       setMessage('Failed to set chat room');

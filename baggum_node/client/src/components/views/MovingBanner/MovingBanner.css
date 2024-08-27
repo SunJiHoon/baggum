@@ -1,0 +1,46 @@
+/* src/components/MovingBanner.css */
+.moving-banner {
+    position: relative;
+    top: 20%;
+    /* width: 300px; 배너의 너비 */
+    /* height: 150px; 배너의 높이 */
+    width: 50%; /* 부모 요소의 80% 너비 */
+    height: 20vh; /* 화면 높이의 40% */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  .banner-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .prev-button, .next-button {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 50%;
+  }
+  
+  .prev-button {
+    position: absolute;
+    left: 10px;
+  }
+  
+  .next-button {
+    position: absolute;
+    right: 10px;
+  }
+  
+  .prev-button:hover, .next-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  

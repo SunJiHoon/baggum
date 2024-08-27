@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import NavBar from '../NavBar/NavBar';
+import MovingBanner from '../MovingBanner/MovingBanner';
+import config from '../../../config/dev'; // config import
 
 function LandingPage() {
   // window.location.reload()
@@ -25,7 +27,7 @@ function LandingPage() {
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
   const onClickHandler = () => {
-    axios.get(`${baseUrl}/api/users/logout`, { withCredentials: true })
+    axios.get(`${config.baseUrl}/api/users/logout`, { withCredentials: true })
     .then(response => {
       console.log(response.data);
       if (response.data.success === true){
@@ -43,7 +45,13 @@ function LandingPage() {
       <NavBar />
       <div style={{
         display: 'flex', justifyContent: 'center', alignItems: 'center',
-        width: '100%', height: '100vh'
+        width: '100%', height: '20vh'
+      }}>
+        <MovingBanner />
+      </div>
+      <div style={{
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        width: '100%', height: '60vh'
       }}>
         <h2>시작 페이지</h2>
         {isAuthenticated && (

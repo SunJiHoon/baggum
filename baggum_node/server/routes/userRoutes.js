@@ -89,6 +89,26 @@ router.get('/logout', auth, async (req, res) => {
 
 
 
+router.get('/getId', async (req, res) => {
+  const { email } = req.query;  // 쿼리 파라미터로 이메일을 받아옴
+
+  try {
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email is required" });
+    }
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    return res.status(200).json({ success: true, userId: user.id });
+  } catch (error) {
+    console.error("Error fetching user ID:", error);
+    return res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+});
 
 
 

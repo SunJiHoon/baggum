@@ -1,14 +1,14 @@
 import React from 'react'
 import { useAuth } from '../../contexts/AuthContext';
 import axios from "axios";
+import config from '../../../config/dev'; // config import
 import './NavBar.css';
 
 const NavBar = () => {
   const { isAuthenticated } = useAuth();
-  const baseUrl = process.env.REACT_APP_BASE_URL;
 
   const onClickHandler = () => {
-    axios.get(`${baseUrl}/api/users/logout`, { withCredentials: true })
+    axios.get(`${config.baseUrl}/api/users/logout`, { withCredentials: true })
     .then(response => {
       console.log(response.data);
       if (response.data.success === true){
@@ -24,8 +24,9 @@ const NavBar = () => {
     <nav>
       <ul>
         <div className="left-icons">
-          <li><a href="#iconA"><img src="iconA.png" alt="Icon A"></img></a></li>
-          <li><a href="#iconB"><img src="iconB.png" alt="Icon B"></img></a></li>
+          <li><a href="#icon0"><img src="/images/alarm.png" alt="Icon 0" className="img-small"></img></a></li>
+          <li><a href="#iconA"><img src="/images/baggumLogo_1.png" alt="Icon A" className="img-small"></img></a></li>
+          <li><a href="#iconB"><img src="images/baggumLogo_2.png" alt="Icon B" className="img-small"></img></a></li>
         </div>
         <div className="right-links">
           <li><a href="/">Home</a></li>
@@ -35,7 +36,7 @@ const NavBar = () => {
             <>
               <li>
                 <button onClick={onClickHandler}>
-                  로그아웃
+                  Logout
                 </button>
               </li>
               <li><a href="/mypage">MyPage</a></li>

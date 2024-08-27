@@ -51,7 +51,7 @@ function ItemDetail() {
     .then(response => {
       if (response.data.message === 'Users successfully added to the room') {
         // 채팅방으로 이동
-        navigate(`/chat/${roomId}`);
+        navigate(`/chat/room/${roomId}`);
         // history.push(`/chat/${roomName}`);
       } else {
         alert('Failed to create or join the chat room');

@@ -55,8 +55,9 @@ router.post('/admin/setChatRoom', async (req, res) => {
 
 
 router.get('/auth/chat', auth, async (req, res) => {
-  roomId = req.query; // roomId는 Room 모델의 name을 의미
-  userId = req.user.id;
+  // const roomId = req.query; // roomId는 Room 모델의 name을 의미
+  // userId = req.user.id;
+  const { roomId, userId } = req.query; // roomId와 userId를 쿼리 파라미터에서 추출
 
   if (!roomId) {
     return res.status(400).json({ error: 'roomId is required' });
@@ -71,17 +72,19 @@ router.get('/auth/chat', auth, async (req, res) => {
 
     const roomMapping = await UserRoomMapping.findAll({ where: { roomId: room.id } });
 
-    if (roomMapping.length !== 2) {
-      return res.status(403).json({ error: 'Unauthorized' });
-    }
+    // if (roomMapping.length !== 2) {
+    //   return res.status(403).json({ error: 'Unauthorized' });
+    // }
 
     const userIds = roomMapping.map(mapping => mapping.userId);
-
-    if (!userIds.includes(userId)) {
-      return res.status(403).json({ error: 'Unauthorized' });
+    console.log(userIds);
+    console.log(userId);
+    const userIdNum = parseInt(userId, 10); // userId를 숫자로 변환
+    if (!userIds.includes(userIdNum)) {
+      return res.status(403).json({ error: 'Unauthorized'});
     }
 
-    res.status(200).json({ message: 'Welcome to the chat room!' });
+    res.status(200).json({ message: 'Welcome to the chat room!', isAuth : true  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });

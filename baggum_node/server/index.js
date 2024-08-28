@@ -5,20 +5,21 @@ const socketIo = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server); // CORS 설정 없이 socket.io 서버를 설정
+// const io = socketIo(server); // CORS 설정 없이 socket.io 서버를 설정
 
-// const io = socketIo(server, {
-//   cors: {
-//     origin: [
-//       "http://localhost:3000",    // 로컬 개발 환경
-//       "http://3.34.54.89:5000",    // 실제 배포된 서버
-//       "https://baggumi.com",
-//       "https://api.baggumi.com",
-//       "http://localhost:5000",    // 로컬 개발 환경
-//     ],
-//     methods: ["GET", "POST"]
-//   }
-// });
+const io = socketIo(server, {
+  cors: {
+    origin: [
+      "http://localhost:3000",    // 로컬 개발 환경
+      "http://3.34.54.89:5000",    // 실제 배포된 서버
+      "https://baggumi.com",
+      "https://api.baggumi.com",
+      "http://localhost:5000",    // 로컬 개발 환경
+    ],
+    // methods: ["GET", "POST"],
+    credentials: true,
+  }
+});
 
 const port = 5000;
 const bodyParser = require('body-parser');

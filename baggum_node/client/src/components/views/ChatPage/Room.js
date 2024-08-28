@@ -65,24 +65,22 @@ const Room = () => {
           } else {
             // console.log(isAuthenticatedInChat);
             console.log("인증실패");
-            // navigate('/');    
-            // throw new Error('Unauthorized'); // 인증 실패 시 에러 발생
+            throw new Error('Unauthorized'); // 인증 실패 시 에러 발생
           }
         }
       } catch (error) {
         console.log(error);
-        // if (error.message === 'Unauthorized') {
-        //   setError('You are not authorized to enter this chat room.');
-        // } else {
-        //   setError('An unexpected error occurred.');
-        // }
-        // navigate('/');
+        if (error.message === 'Unauthorized') {
+          setError('You are not authorized to enter this chat room.');
+        } else {
+          setError('An unexpected error occurred.');
+        }
+        navigate('/');
       }
     };
 
     console.log(roomId);
     if (roomId && socket && user) {
-      // console.log(roomNum);
       authenticateUser();
     }  
   }, [roomId, navigate, loading, user, socket]);

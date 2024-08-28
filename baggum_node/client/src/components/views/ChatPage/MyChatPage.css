@@ -1,0 +1,96 @@
+myChat .chat-container {
+    width: 90%;
+    max-width: 1182px;
+    height: 700px;
+    overflow-y: auto;
+    border: 1px solid #000;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    font-family: 'Noto Sans KR';
+  }
+
+  myChat .chat-header {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 44px;
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+    margin: 0;
+    border-top-left-radius: 8px; /* 왼쪽 상단 모서리 둥글게 */
+    border-top-right-radius: 8px; /* 오른쪽 상단 모서리 둥글게 */
+  }
+  
+  myChat  .chat-message {
+    display: flex;
+    padding: 8px;
+    border-bottom: 1px solid #000;
+    align-items: center;
+    position: relative;
+  }
+  
+  myChat  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  myChat  .user-icon {
+    margin-right: 8px;
+    padding: 16px;
+    width: 80px;
+    height: 80px;
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column; /* 수직 정렬 */
+    flex-grow: 1; /* 공간을 채우도록 설정 */
+}
+  
+  myChat  .user-name {
+    font-size: 16px;
+  }
+  
+  myChat .unread-count {
+    margin-left: auto;
+    background-color: #ffc0bb;
+    border: 1px solid #e97d7d;
+    color: #dd1f1f;
+    border-radius: 50%; /* 원형으로 만들기 위해 반지름을 50%로 설정 */
+    padding: 0; /* 패딩 제거 */
+    width: 24px; /* 가로 길이 설정 (원하는 크기로 변경 가능) */
+    height: 24px; /* 세로 길이 설정 (width와 동일하게) */
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+  myChat  .message-content {
+    margin-left: 24px;
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+  }
+  
+  myChat  .message-text {
+    display: flex;
+    margin-bottom: 4px;
+    margin-right: 8px;
+    font-size: 18px;
+    padding: 5;
+  }
+  
+  myChat  .message-time {
+    color: #000;
+    font-size: 18px;
+    margin-left: auto;
+  }
+  

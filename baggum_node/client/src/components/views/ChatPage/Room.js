@@ -52,16 +52,16 @@ const Room = () => {
 
         if (!loading) {
           if (response.status === 200) {
-            console.log("인증성공");
-            socket.off('message');
+            // console.log("인증성공");
+            // socket.off('message');
 
-            // 특정 방에 참가
-            socket.emit('joinRoom', { roomId: roomId });
+            // // 특정 방에 참가
+            // socket.emit('joinRoom', { roomId: roomId });
 
-            // 메시지 수신
-            socket.on('message', (message) => {
-              setMessages((prevMessages) => [...prevMessages, message]);
-            });
+            // // 메시지 수신
+            // socket.on('message', (message) => {
+            //   setMessages((prevMessages) => [...prevMessages, message]);
+            // });
           } else {
             // console.log(isAuthenticatedInChat);
             console.log("인증실패");

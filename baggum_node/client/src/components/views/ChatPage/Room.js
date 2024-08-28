@@ -60,6 +60,7 @@ const Room = () => {
           }
         }
       } catch (error) {
+        console.log(error);
         if (error.message === 'Unauthorized') {
           setError('You are not authorized to enter this chat room.');
         } else {

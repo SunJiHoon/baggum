@@ -26,6 +26,7 @@ const Room = () => {
 
   useEffect(() => {
     const authenticateUser = async () => {
+      console.log("시작");
       try {
         const currentUserEmail = user.email;
         // const currentUserId = await axios.get(`${config.baseUrl}/api/users/getId`);

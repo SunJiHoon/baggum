@@ -41,8 +41,8 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'http://localhost:5000',
-    'http://3.34.54.89:5000',
-    'http://3.34.54.89:3000',
+    // 'http://3.34.54.89:5000',
+    // 'http://3.34.54.89:3000',
     'https://baggumi.com',
     'https://api.baggumi.com',
   ] // Whitelist the domains you want to allow

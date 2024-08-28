@@ -9,7 +9,7 @@ import { useAuth } from '../../contexts/AuthContext'; // 실제 경로로 수정
 // import { useChatAuth } from '../../contexts/ChatAuthContext'; // ChatAuthContext import
 
 //const socket = io('http://localhost:5000');
-const socket = io(`https://${config.baseUrl}`);
+// const socket = io(`https://${config.baseUrl}`);
 
 const Room = () => {
   const { roomId } = useParams(); // URL에서 roomId 추출
@@ -18,11 +18,17 @@ const Room = () => {
   const [messages, setMessages] = useState([]);
   const userName = 'User1'; // 임시 사용자 이름
   const [error, setError] = useState(null);
+  const [socket, setSocket] = useState(null);
 
   const messagesEndRef = useRef(null);
   const { loading, user } = useAuth();
   // const { isAuthenticatedInChat, checkChatRoomAuth } = useChatAuth(); // ChatAuthContext에서 필요한 값과 함수 가져오기
 
+  useEffect(() => {
+    const newSocket = io(`${config.baseUrl}`);
+    setSocket(newSocket);
+    return () => newSocket.close();
+  }, []);
 
   useEffect(() => {
     const authenticateUser = async () => {
@@ -74,11 +80,11 @@ const Room = () => {
     };
 
     console.log(roomId);
-    if (roomId) {
+    if (roomId && socket && user) {
       // console.log(roomNum);
       authenticateUser();
     }  
-  }, [roomId, navigate, loading, user]);
+  }, [roomId, navigate, loading, user, socket]);
 
   // 메세지 추가될 때마다 스크롤을 아래로 이동
   useEffect(() => {

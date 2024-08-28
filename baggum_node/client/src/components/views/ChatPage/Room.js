@@ -36,10 +36,12 @@ const Room = () => {
         });
         const currentUserId = currentUserIdResponse.data.userId;
 
-      const response = await axios.get(`${config.baseUrl}/api/chat/auth/chat`, {
-        params: { roomId, userId: currentUserId },
-        withCredentials: true,
-      });
+        const response = await axios.get(`${config.baseUrl}/api/chat/auth/chat`, {
+          params: { roomId, userId: currentUserId },
+          withCredentials: true,
+        });
+        console.log(loading);
+        console.log(response);
 
         if (!loading) {
           if (response.status === 200) {

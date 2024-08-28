@@ -63,13 +63,13 @@ sequelize.sync()
 
 // 라우트
 const userRoutes = require('./routes/userRoutes');
-const chatRoutes = require('./routes/chatRoutes')(io);
+// const chatRoutes = require('./routes/chatRoutes')(io);
 const merchandiseRoutes = require('./routes/merchandiseRoutes');
 const chatHistoryRoutes = require('./routes/chatHistoryRoutes');
 const smtpRoutes = require('./routes/smtpRoutes');
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
-app.use('/api/chat', chatRoutes);
+// app.use('/api/chat', chatRoutes);
 app.use('/api/merchandise', merchandiseRoutes);
 app.use('/api/chat/read', chatHistoryRoutes);
 app.use('/api/smtp', smtpRoutes);

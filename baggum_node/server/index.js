@@ -4,7 +4,9 @@ const http = require('http'); // <-- http 모듈을 불러옵니다.
 const socketIo = require('socket.io');
 
 const app = express();
-// const server = http.createServer(app);
+const server = http.createServer(app);
+const io = socketIo(server); // CORS 설정 없이 socket.io 서버를 설정
+
 // const io = socketIo(server, {
 //   cors: {
 //     origin: [
@@ -49,10 +51,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions)); // Use the cors middleware with your options
-// app.use(cors({
-//   origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
-// }));
-
 
 // 모델 동기화
 sequelize.sync()
@@ -62,20 +60,20 @@ sequelize.sync()
 
 // 라우트
 const userRoutes = require('./routes/userRoutes');
-// const chatRoutes = require('./routes/chatRoutes')(io);
+const chatRoutes = require('./routes/chatRoutes')(io);
 const merchandiseRoutes = require('./routes/merchandiseRoutes');
 const chatHistoryRoutes = require('./routes/chatHistoryRoutes');
 const smtpRoutes = require('./routes/smtpRoutes');
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
-// app.use('/api/chat', chatRoutes);
+app.use('/api/chat', chatRoutes);
 app.use('/api/merchandise', merchandiseRoutes);
 app.use('/api/chat/read', chatHistoryRoutes);
 app.use('/api/smtp', smtpRoutes);
 
-// server.listen(port, () => {
-//   console.log(`Example app listening at http://localhost:${port}`);
-// });
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+// app.listen(port, () => {
+//   console.log(`Example app listening at http://localhost:${port}`);
+// });

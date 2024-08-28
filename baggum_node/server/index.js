@@ -15,7 +15,8 @@ const io = socketIo(server, {
       "http://localhost:5000",    // 로컬 개발 환경
     ],
     methods: ["GET", "POST"]
-  }
+  },
+  transports: ['websocket', 'polling']  // WebSocket과 polling을 모두 지원
 });
 
 const port = 5000;

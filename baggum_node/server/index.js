@@ -36,21 +36,22 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 const cors = require('cors'); // Import the cors package
 
-// const corsOptions = {
-//   credentials: true,
-//   origin: [
-//     'http://localhost:3000',
-//     'http://localhost:5000',
-//     'http://3.34.54.89:5000',
-//     'https://baggumi.com',
-//     'https://api.baggumi.com',
-//   ] // Whitelist the domains you want to allow
-// };
+const corsOptions = {
+  credentials: true,
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5000',
+    'http://3.34.54.89:5000',
+    'http://3.34.54.89:3000',
+    'https://baggumi.com',
+    'https://api.baggumi.com',
+  ] // Whitelist the domains you want to allow
+};
 
-// app.use(cors(corsOptions)); // Use the cors middleware with your options
-app.use(cors({
-  origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
-}));
+app.use(cors(corsOptions)); // Use the cors middleware with your options
+// app.use(cors({
+//   origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
+// }));
 
 
 // 모델 동기화

@@ -65,7 +65,7 @@ const Room = () => {
           } else {
             // console.log(isAuthenticatedInChat);
             console.log("인증실패");
-            navigate('/');    
+            // navigate('/');    
             // throw new Error('Unauthorized'); // 인증 실패 시 에러 발생
           }
         }

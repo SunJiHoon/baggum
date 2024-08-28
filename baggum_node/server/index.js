@@ -36,24 +36,22 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 const cors = require('cors'); // Import the cors package
 
-const corsOptions = {
-  credentials: true,
-  origin: [
-    'http://localhost:3000',    
-    'http://localhost:5000',
-    'http://3.34.54.89:5000',
-    'https://baggumi.com',
-    'https://api.baggumi.com',
-  ] // Whitelist the domains you want to allow
-};
+// const corsOptions = {
+//   credentials: true,
+//   origin: [
+//     'http://localhost:3000',
+//     'http://localhost:5000',
+//     'http://3.34.54.89:5000',
+//     'https://baggumi.com',
+//     'https://api.baggumi.com',
+//   ] // Whitelist the domains you want to allow
+// };
 
-app.use(cors(corsOptions)); // Use the cors middleware with your options
+// app.use(cors(corsOptions)); // Use the cors middleware with your options
+app.use(cors({
+  origin: '*', // 모든 출처 허용 옵션. true 를 써도 된다.
+}));
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*"); // 또는 필요한 도메인으로 변경
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 // 모델 동기화
 sequelize.sync()

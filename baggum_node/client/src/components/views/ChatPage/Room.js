@@ -53,7 +53,7 @@ const Room = () => {
         if (!loading) {
           if (response.status === 200) {
             console.log("인증성공");
-            socket.off('message');
+            // socket.off('message');
 
             // 특정 방에 참가
             socket.emit('joinRoom', { roomId: roomId });

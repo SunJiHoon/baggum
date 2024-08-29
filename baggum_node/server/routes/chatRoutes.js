@@ -77,8 +77,8 @@ router.get('/auth/chat', auth, async (req, res) => {
     // }
 
     const userIds = roomMapping.map(mapping => mapping.userId);
-    console.log(userIds);
-    console.log(userId);
+    // console.log(userIds);
+    // console.log(userId);
     const userIdNum = parseInt(userId, 10); // userId를 숫자로 변환
     if (!userIds.includes(userIdNum)) {
       return res.status(403).json({ error: 'Unauthorized'});
@@ -86,7 +86,7 @@ router.get('/auth/chat', auth, async (req, res) => {
 
     res.status(200).json({ message: 'Welcome to the chat room!', isAuth : true  });
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -99,7 +99,7 @@ module.exports = (io) => {
     // 사용자 특정 방에 참여
     socket.on('joinRoom', async ({ userId, roomId }) => {
       try {
-        await UserRoomMapping.create({ userId, roomId });
+        // await UserRoomMapping.create({ userId, roomId });
 
         socket.join(roomId);
         console.log(`${userId} joined room ${roomId}`);
@@ -108,18 +108,25 @@ module.exports = (io) => {
       }
     });
   
+      // 메시지를 특정 방으로 전송
+    socket.on('sendMessage', ({ roomId, message }) => {
+      io.to(roomId).emit('message', message);
+      // console.log(`Message sent to room ${roomId}: ${message}`);
+    });
+
+
     // 방으로 메시지 보내기
     socket.on('message', async ({ roomId, message, userName, timestamp }) => {
       socket.to(roomId).emit('message', { message, userName, timestamp } );
 
       try { // 메시지를 ChatHistory 테이블에 저장
         console.log(userId, realRoomId);
-        await ChatHistory.create({ 
-          content: message,
-          userId: userId,
-          roomId: realRoomId,
-          createDate: new Date()
-        });
+        // await ChatHistory.create({ 
+        //   content: message,
+        //   userId: userId,
+        //   roomId: realRoomId,
+        //   createDate: new Date()
+        // });
       } catch (error) {
         console.error('Failed to save chat history: ', error);
       }

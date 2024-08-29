@@ -5,11 +5,8 @@ import axios from 'axios';
 import NavBar from '../NavBar/NavBar';
 import './Room.css';
 import config from '../../../config/dev'; // config 파일 import
-import { useAuth } from '../../contexts/AuthContext'; // 실제 경로로 수정
 
 const socket = io('http://localhost:5000');
-// const socket = io(`https://${config.baseUrl}`);
-// const socket = io(`${config.baseUrl}`);
 
 const Room = () => {
   const { roomId } = useParams(); // URL에서 roomId 추출
@@ -20,50 +17,30 @@ const Room = () => {
   const [error, setError] = useState(null);
 
   const messagesEndRef = useRef(null);
-  const { loading, user } = useAuth();
-  // const { isAuthenticatedInChat, checkChatRoomAuth } = useChatAuth(); // ChatAuthContext에서 필요한 값과 함수 가져오기
 
   useEffect(() => {
     const authenticateUser = async () => {
-      console.log("시작");
       try {
-        const currentUserEmail = user.email;
-        // const currentUserId = await axios.get(`${config.baseUrl}/api/users/getId`);
-        const currentUserIdResponse = await axios.get(`${config.baseUrl}/api/users/getId`, {
-          params: {
-            email: currentUserEmail
-          }
-        });
-        const currentUserId = currentUserIdResponse.data.userId;
+        const baseURL = process.env.REACT_APP_BASE_URL;
 
         const response = await axios.get(`${config.baseUrl}/api/chat/auth/chat`, {
-          params: { roomId, userId: currentUserId },
-          withCredentials: true,
+          params: { roomId: roomId }
         });
-        console.log(loading);
-        console.log(response);
 
-        if (!loading) {
-          if (response.status === 200) {
-            console.log("인증성공");
-            // socket.off('message');
+        if (response.status === 200) {
+          socket.off('message');
+          console.log("roomNum");
+          console.log(roomId);
+          // 특정 방에 참가
+          socket.emit('joinRoom', { roomId: roomId });
 
-            // 특정 방에 참가
-            socket.emit('joinRoom', { roomId: 1 });
-
-            // 메시지 수신
-            socket.on('message', (message) => {
-              setMessages((prevMessages) => [...prevMessages, message]);
-            });
-          } else {
-            // console.log(isAuthenticatedInChat);
-            console.log("인증실패");
-            throw new Error('Unauthorized'); // 인증 실패 시 에러 발생
-          }
+          // 메시지 수신
+          socket.on('message', (message) => {
+            setMessages((prevMessages) => [...prevMessages, message]);
+          });
         }
       } catch (error) {
-        console.log(error);
-        if (error.message === 'Unauthorized') {
+        if (error.response && (error.response.status === 403 || error.response.status === 400)) {
           setError('You are not authorized to enter this chat room.');
         } else {
           setError('An unexpected error occurred.');
@@ -72,11 +49,12 @@ const Room = () => {
       }
     };
 
-    console.log(roomId);
-    if (roomId && socket && user) {
-      authenticateUser();
-    }  
-  }, [roomId, navigate, loading, user, socket]);
+    authenticateUser();
+
+    return () => {
+      socket.off('message');
+    };
+  }, [roomId, navigate]);
 
   // 메세지 추가될 때마다 스크롤을 아래로 이동
   useEffect(() => {

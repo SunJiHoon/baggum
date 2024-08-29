@@ -14,6 +14,7 @@ import RegisterPage from "./components/views/RegisterPage/RegisterPage";
 import ChatPage from "./components/views/ChatPage/ChatPage";
 import ChatRoom from "./components/views/ChatPage/ChatRoom";
 import Room from "./components/views/ChatPage/Room";
+import TestRoom from "./components/views/ChatPage/TestRoom";
 import SetChatRoom from './components/views/ChatPage/SetChatRoom';
 import MyChatRoom from "./components/views/ChatPage/MyChatPage";
 import ItemsPage from './components/views/ItemPage/ItemPage';
@@ -37,6 +38,8 @@ function App() {
           
           <Route exact path="/chat/room" element={<ChatRoom />} />
           <Route exact path="/chat/room/:roomId" element={<Room />} />
+
+          <Route exact path="/chat/test/room/:roomId" element={<TestRoom />} />
           <Route exact path="/chat/my" element={<MyChatRoom />} />
 
           <Route path="/items" element={<ItemsPage />} />

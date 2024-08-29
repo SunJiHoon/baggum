@@ -7,9 +7,9 @@ import './Room.css';
 import config from '../../../config/dev'; // config 파일 import
 import { useAuth } from '../../contexts/AuthContext'; // 실제 경로로 수정
 
-const socket = io('http://localhost:5000');
+// const socket = io('http://localhost:5000');
 // const socket = io(`https://${config.baseUrl}`);
-// const socket = io(`${config.baseUrl}`);
+const socket = io(`${config.baseUrl}`);
 
 const Room = () => {
   const { roomId } = useParams(); // URL에서 roomId 추출

@@ -8,6 +8,7 @@
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "devv": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "dev3": "concurrently \"npm run start\" \"npm run cracoStart --prefix client\"",
     "chatServer": "node server/server.js"
   },
   "author": "",

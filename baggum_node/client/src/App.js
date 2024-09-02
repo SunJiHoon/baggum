@@ -36,11 +36,11 @@ function App() {
           <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/chat" element={<ChatPage />} />
           
-          <Route exact path="/chat/room" element={<ChatRoom />} />
-          <Route exact path="/chat/room/:roomId" element={<Room />} />
+          {/* <Route exact path="/chat/room" element={<ChatRoom />} /> */}
+          {/* <Route exact path="/chat/room/:roomId" element={<Room />} /> */}
 
-          <Route exact path="/chat/test/room/:roomId" element={<TestRoom />} />
-          <Route exact path="/chat/my" element={<MyChatRoom />} />
+          {/* <Route exact path="/chat/test/room/:roomId" element={<TestRoom />} /> */}
+          {/* <Route exact path="/chat/my" element={<MyChatRoom />} /> */}
 
           <Route path="/items" element={<ItemsPage />} />
         <Route path="/items/:id" element={<ItemDetail />} />

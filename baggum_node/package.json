@@ -8,6 +8,7 @@
     "backend": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "devv": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
+    "dev3": "concurrently \"npm run start\" \"npm run cracoStart --prefix client\"",
     "chatServer": "node server/server.js"
   },
   "author": "",
@@ -24,6 +25,7 @@
     "mongoose": "^8.4.4",
     "mysql2": "^3.10.3",
     "nodemailer": "^6.9.14",
+    "react-app-rewired": "^2.2.1",
     "sequelize": "^6.37.3",
     "socket.io": "^4.7.5",
     "styled-components": "^6.1.12",

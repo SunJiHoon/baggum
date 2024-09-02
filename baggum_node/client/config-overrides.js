@@ -1,16 +1,19 @@
-import envConfig from 'src/config/dev'; // config import
+// config-overrides.js
+const { override, addWebpackDevServerConfig } = require('customize-cra');
 
-module.exports = function override(config, env) {
-    // Webpack 설정 수정
-    config.devServer = {
-        ...config.devServer,
-        client: {
-            webSocketURL: {
-                hostname: `${envConfig.webSocketURL}`,
-                port: `${envConfig.webSocketPort}`,
-                protocol: `${envConfig.webSocketProtocol}`,
-            },
-        },
-    };
-    return config;
-};
+module.exports = override(
+  addWebpackDevServerConfig({
+    devServer: {
+      port: 3000,
+      liveReload: true,
+      host: "0.0.0.0",
+      allowedHosts: "all",
+      open: true,
+      client: {
+        overlay: true,
+        webSocketURL: "ws://0.0.0.0:5000/ws",
+      },
+      compress: true,
+    },
+  })
+);

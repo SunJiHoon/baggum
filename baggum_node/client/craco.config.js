@@ -6,7 +6,7 @@ module.exports = {
         ...devServerConfig,
         client: {
           ...devServerConfig.client,
-          webSocketURL: 'wss://baggumi.com/ws',
+          webSocketURL: 'wss://socket.baggumi.com/ws',
         },
       };
     },

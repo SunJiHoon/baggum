@@ -45,4 +45,13 @@ router.get('/find/all', async (req, res) => {
     }
 });
 
+router.get('/chat/page', async (req, res)=>{
+  const messages = [
+    { user: 'User 3', message: "안녕하세요! 등록하신 상품에 관심이 있습니다. 아직 구매 가능한가요?", time: '10:20 AM', unreadCount: 0 },
+    { user: 'User 2', message: '안녕하세요! 네, 가격은 협상 가능합니다. 얼마를 제안하시겠습니까?', time: '12:00 PM', unreadCount: 1 },
+    { user: 'User 1', message: '위치가 어디인가요?', time: '12:34 PM', unreadCount: 2 },
+  ];
+  res.json(messages);
+})
+
 module.exports = router;

@@ -10,7 +10,7 @@ const MyChatPage = () => {
   ];
 
   return (
-    <myChat>
+    <MyChat>
     <div>
         <NavBar />
     <div className="chat-container">
@@ -30,7 +30,7 @@ const MyChatPage = () => {
       ))}
     </div>
     </div>
-    </myChat>
+    </MyChat>
   );
 }
 

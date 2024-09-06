@@ -1,4 +1,4 @@
-myChat .chat-container {
+MyChat .chat-container {
     width: 90%;
     max-width: 1182px;
     height: 700px;
@@ -13,7 +13,7 @@ myChat .chat-container {
     font-family: 'Noto Sans KR';
   }
 
-  myChat .chat-header {
+  MyChat .chat-header {
     position: relative;
     flex-shrink: 0;
     display: flex;
@@ -28,7 +28,7 @@ myChat .chat-container {
     border-top-right-radius: 8px; /* 오른쪽 상단 모서리 둥글게 */
   }
   
-  myChat  .chat-message {
+  MyChat  .chat-message {
     display: flex;
     padding: 8px;
     border-bottom: 1px solid #000;
@@ -36,12 +36,12 @@ myChat .chat-container {
     position: relative;
   }
   
-  myChat  .user-info {
+  MyChat  .user-info {
     display: flex;
     align-items: center;
   }
   
-  myChat  .user-icon {
+  MyChat  .user-icon {
     margin-right: 8px;
     padding: 16px;
     width: 80px;
@@ -54,11 +54,11 @@ myChat .chat-container {
     flex-grow: 1; /* 공간을 채우도록 설정 */
 }
   
-  myChat  .user-name {
+MyChat  .user-name {
     font-size: 16px;
   }
   
-  myChat .unread-count {
+  MyChat .unread-count {
     margin-left: auto;
     background-color: #ffc0bb;
     border: 1px solid #e97d7d;
@@ -73,14 +73,14 @@ myChat .chat-container {
     align-items: center;
 }
   
-  myChat  .message-content {
+MyChat  .message-content {
     margin-left: 24px;
     display: flex;
     align-items: center;
     margin-right: 8px;
   }
   
-  myChat  .message-text {
+  MyChat  .message-text {
     display: flex;
     margin-bottom: 4px;
     margin-right: 8px;
@@ -88,7 +88,7 @@ myChat .chat-container {
     padding: 5;
   }
   
-  myChat  .message-time {
+  MyChat  .message-time {
     color: #000;
     font-size: 18px;
     margin-left: auto;

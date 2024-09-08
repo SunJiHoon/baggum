@@ -27,7 +27,7 @@ function LoginPage() {
 
     let body={
       email: Email,
-      password: Password
+      password: Password,
     }
     // const baseUrl = process.env.REACT_APP_BASE_URL;
     // const request = axios.post(`${baseUrl}/api/users/login`, body, { withCredentials: true })
@@ -42,6 +42,9 @@ function LoginPage() {
       }else{
         alert("Failed to login");
       }
+    })
+    .catch((err)=>{
+      console.error(err, 'dispatch 에러')
     })
 
   }

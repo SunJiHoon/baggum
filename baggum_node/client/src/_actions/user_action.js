@@ -3,12 +3,13 @@ import { LOGIN_USER, REGISTER_USER, AUTH_USER } from './types'
 import config from '../config/dev'; // config.js 파일의 경로가 현재 파일 기준으로 맞는지 확인하세요
 
 export function loginUser(dataToSubmit){
-    console.log(dataToSubmit)
+    console.log(dataToSubmit, '로그인 데이터')
 
-    //const baseUrl = process.env.REACT_APP_BASE_URL;
     const request = axios.post(`${config.baseUrl}/api/users/login`, dataToSubmit, { withCredentials: true })
     .then(response =>  response.data )
-
+    .catch((err)=> {
+        console.error('axios.post 에러', err)
+    })
     return{
         type: LOGIN_USER,
         payload: request,

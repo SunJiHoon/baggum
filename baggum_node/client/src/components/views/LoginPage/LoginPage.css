@@ -1,0 +1,134 @@
+loginMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+  }
+
+loginMain #login {
+    display: flex;
+    justify-content: flex-start;
+    width: 345px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+loginMain .login-container {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 272px;
+    width: 345px;
+    background-color: #EDF6E9;
+    border: 1px solid #757575;
+    border-radius: 8px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 10px;
+}
+
+/* 로그인 입력 컨테이너 */
+loginMain .input-container {
+    margin: 5px;
+}
+loginMain .input-container div {
+    width: 269px;
+    display: flex;
+    flex-direction: flex-start;
+    margin-bottom: 8px;
+}
+loginMain .input-container input {
+    width: 269px;
+    height: 25px;
+    border: 1px solid #757575;
+    border-radius: 10px;
+    padding: 5px; /* 입력 필드 내부 여백 */
+}
+loginMain #forgot-password {
+    display: flex;
+    justify-content: flex-end;
+}
+loginMain #forgot-password a {
+    text-decoration: none;
+    color: #757575;
+    font-size: 11px;
+}
+
+/* 로그인 버튼 컨테이너 */
+loginMain .sign-in-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 148px;
+    height: 33px;
+    background-color: #eeeeee;
+    border: 1px solid #757575;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+loginMain .sign-in-container button {
+    width: 90%;
+    height: 100%;
+    border: none;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+loginMain .sign-in-container button:hover {
+    cursor: pointer;
+}
+
+/* 회원가입 페이지 이동 컨테이너 */
+loginMain .navigate-register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 345px;
+    height: 44px;
+    border: 1px solid #757575;
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+loginMain .navigate-register-container a {
+    color: black;
+    text-decoration: none;
+    border-bottom: black;
+    border-bottom: 1px solid;
+}
+
+/* 아이콘 */
+loginMain .email-icon {
+    display: inline-block;
+    width: 26px;
+    height: 29px;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23000' d='M28 6H4a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2m-2.2 2L16 14.78L6.2 8ZM4 24V8.91l11.43 7.91a1 1 0 0 0 1.14 0L28 8.91V24Z'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    margin-right: 5px;
+}
+/* carbon/email, license: Apache 2.0 */
+loginMain .password-icon {
+    display: inline-block;
+    width: 25px;
+    height: 27px;
+    --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M8 17a1 1 0 1 0 0-2a1 1 0 0 0 0 2m4 0a1 1 0 1 0 0-2a1 1 0 0 0 0 2m5-1a1 1 0 1 1-2 0a1 1 0 0 1 2 0'/%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M6.75 8a5.25 5.25 0 0 1 10.335-1.313a.75.75 0 0 0 1.452-.374A6.75 6.75 0 0 0 5.25 8v1.303q-.34.023-.642.064c-.9.12-1.658.38-2.26.981c-.602.602-.86 1.36-.981 2.26c-.117.867-.117 1.97-.117 3.337v.11c0 1.367 0 2.47.117 3.337c.12.9.38 1.658.981 2.26c.602.602 1.36.86 2.26.982c.867.116 1.97.116 3.337.116h8.11c1.367 0 2.47 0 3.337-.116c.9-.122 1.658-.38 2.26-.982s.86-1.36.982-2.26c.116-.867.116-1.97.116-3.337v-.11c0-1.367 0-2.47-.116-3.337c-.122-.9-.38-1.658-.982-2.26s-1.36-.86-2.26-.981c-.867-.117-1.97-.117-3.337-.117h-8.11q-.634 0-1.195.003zm-1.942 2.853c-.734.099-1.122.28-1.399.556c-.277.277-.457.665-.556 1.4c-.101.755-.103 1.756-.103 3.191s.002 2.436.103 3.192c.099.734.28 1.122.556 1.399c.277.277.665.457 1.4.556c.754.101 1.756.103 3.191.103h8c1.435 0 2.436-.002 3.192-.103c.734-.099 1.122-.28 1.399-.556c.277-.277.457-.665.556-1.4c.101-.755.103-1.756.103-3.191s-.002-2.437-.103-3.192c-.099-.734-.28-1.122-.556-1.399c-.277-.277-.665-.457-1.4-.556c-.755-.101-1.756-.103-3.191-.103H8c-1.435 0-2.437.002-3.192.103' clip-rule='evenodd'/%3E%3C/svg%3E");
+    background-color: currentColor;
+    -webkit-mask-image: var(--svg);
+    mask-image: var(--svg);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    margin-right: 5px;
+}
+/* solar/lock-password-unlocked-outline, license: CC BY 4.0 */

@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { registerUser } from '../../../_actions/user_action'
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
+import './RegisterPage.css';
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -54,30 +55,41 @@ function RegisterPage() {
   return (
     <div>
       <NavBar />
-      <div style={{
-      display: 'flex', justifyContent: 'center', alignItems: 'center',
-      width: '100%', height: '100vh'
-    }}>
-      <form style={{display:'flex', flexDirection:'column'}}
-        onSubmit={onSubmitHandler}
-      >
-        <label>Email</label>
-        <input type='email' value={Email} onChange={onEmailHandler}/>
-        <label>Name</label>
-        <input type='text' value={Name} onChange={onNameHandler}/>
-        <label>Password</label>
-        <input type='password' value={Password} onChange={onPasswordHandler}/>
-        <label>Confirm Password</label>
-        <input type='password' value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
-
-        <br/>
-        <button type='submit'>
-          회원 가입
-        </button>
-
-
-      </form>
-    </div>
+      <registerMain>
+        <div id='register'>Create Account</div>
+        <form onSubmit={onSubmitHandler}>
+        <div className='register-container'>
+          {/* 사용자이름 입력 컨테이너 */}
+          <div className='input-container'>
+            <div><span className="username-icon"></span>Username</div>
+            <input type='text' value={Name} onChange={onNameHandler}/>
+          </div>
+          {/* 이메일 입력 컨테이너 */}
+          <div className='input-container'>
+            <div><span className="email-icon"></span>Email</div>
+            <input type='email' value={Email} onChange={onEmailHandler}/>
+          </div>
+          {/* 비밀번호 입력 컨테이너 */}
+          <div className='input-container'>
+            <div><span className="password-icon"></span>Password</div>
+            <input type='password' value={Password} onChange={onPasswordHandler}/>
+          </div>
+          {/* 비밀번호 재확인 입력 컨테이너 */}
+          <div className='input-container'>
+            <div><span className="password-icon"></span>Confirm Password</div>
+            <input type='password' value={ConfirmPassword} onChange={onConfirmPasswordHandler}/>
+          </div>
+          {/* 회원가입 버튼 컨테이너 */}
+          <div className='sign-up-container'>
+            <button id='sign-up-button' type='submit'>Sign up</button>
+          </div>
+        </div>
+        </form>
+        {/* 로그인 페이지 이동 컨테이너 */}
+        <div className='navigate-login-container'>
+          <a href='/login'>Already have an account?</a>
+        </div>
+      </registerMain>
     </div>
   )
 }

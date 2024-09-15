@@ -2,6 +2,7 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('../config/dev'); // dev.js 파일 가져오기
+const time = require('../models/time');
 
 
 // MySQL 데이터베이스 연결 설정
@@ -20,18 +21,43 @@ class User extends Model {
     // return bcrypt.compare(plainPassword, this.password);
   }
 
-  async generateToken() {
-    const token = jwt.sign({ id: this.id }, 'secretToken');
-    this.token = token;
+  async generateAccessToken() {
+    const token = jwt.sign({ id: this.id }, config.ACCESS_SECRET, { expiresIn: config.ACCESS_EXP_TIME });
+    //아직 영국 시간에 맞춰져 있음.
+    this.access_token = token;
+    this.last_activity = time.formatDate(new Date());
     await this.save();
     return token;
   }
 
+  async generateRefreshToken() {
+    const token = jwt.sign({ id: this.id}, config.REFRESH_SECRET/*, { expiresIn: config.REFRESH_TOKEN_EXP_TIME }*/);
+    this.refresh_token = token;
+    //아직 영국시간에 맞춰져 있음.
+    this.last_activity = time.formatDate(new Date());
+    await this.save();
+    return token;
+  }
+
+  async isIdle() {
+    const now = Date.now();
+    // `this.last_activity`가 문자열일 경우만 `parseDate`를 사용합니다.
+    const lastActivity = typeof this.last_activity === 'string'
+      ? new Date(time.parseDate(this.last_activity)).getTime()
+      : new Date(this.last_activity).getTime();
+    console.log('now', now)
+    console.log('last', lastActivity)
+    console.log(now - lastActivity > config.REFRESH_TOKEN_EXP_TIME);
+    const timeDifference = now - lastActivity;
+    return timeDifference > config.REFRESH_TOKEN_EXP_TIME;
+  }
+
+
   static async findByToken(token) {
     try {
-      const decoded = jwt.verify(token, 'secretToken');
-      console.log(decoded);
-      const user = await User.findOne({ where: { id: decoded.id, token } });
+      const decoded = jwt.verify(token, config.ACCESS_SECRET);
+      console.log(decoded, 'decoded 정보');
+      const user = await User.findOne({ where: { id: decoded.id } });
       return user;
     } catch (err) {
       throw err;
@@ -71,7 +97,13 @@ User.init({
   image: {
     type: DataTypes.STRING,
   },
-  token: {
+  access_token: {
+    type:DataTypes.STRING,
+  },
+  refresh_token: {
+    type: DataTypes.STRING,
+  },
+  last_activity:{
     type: DataTypes.STRING,
   },
   tokenExp: {

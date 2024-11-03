@@ -65,12 +65,14 @@ const chatRoutes = require('./routes/chatRoutes')(io);
 const merchandiseRoutes = require('./routes/merchandiseRoutes');
 const chatHistoryRoutes = require('./routes/chatHistoryRoutes');
 const smtpRoutes = require('./routes/smtpRoutes');
+const uploadRoutes = require('./routes/uploadRoutes'); // uploadRoutes import
 const { Server } = require('https');
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/merchandise', merchandiseRoutes);
 app.use('/api/chat/read', chatHistoryRoutes);
 app.use('/api/smtp', smtpRoutes);
+app.use('/api/upload', uploadRoutes);
 
 server.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

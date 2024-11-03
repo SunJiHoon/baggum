@@ -16,6 +16,8 @@ function NewItem() {
   const [userId, setUserId] = useState('');
   const [imagePath, setImagePath] = useState('');
   const [desiredMerchandise, setDesiredMerchandise] = useState('');
+  const [imageFile, setImageFile] = useState(null); // 이미지 파일을 위한 상태
+
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -48,6 +50,22 @@ function NewItem() {
   //   fetchUserId();
   // }, [user]); // user가 변경될 때마다 실행
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    setImageFile(file); // 선택한 이미지를 상태에 저장
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await axios.post(`${config.baseUrl}/api/upload`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      setImagePath(response.data.imagePath); // 서버 응답에서 이미지 경로 설정
+    } catch (error) {
+      console.error("이미지 업로드 중 오류 발생:", error);
+      alert('이미지 업로드에 실패했습니다.');
+    }
+  };
 
   const handleSubmit = async (e) => {
     if (!isAuthenticated || !user) {
@@ -113,7 +131,9 @@ function NewItem() {
         <br />
         <label>
           Image Path:
-          <input type="text" value={imagePath} onChange={(e) => setImagePath(e.target.value)} required />
+          {/* <input type="text" value={imagePath} onChange={(e) => setImagePath(e.target.value)} required /> */}
+          <input type="file" onChange={handleImageUpload} required />
+
         </label>
         <br />
         <label>

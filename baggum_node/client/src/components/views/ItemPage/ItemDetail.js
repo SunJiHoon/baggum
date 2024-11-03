@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import styles from './ItemDetail.module.css';  // CSS Modules import
 
 function ItemDetail() {
   const { isAuthenticated, user } = useAuth();

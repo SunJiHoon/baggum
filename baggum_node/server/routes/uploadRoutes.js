@@ -3,6 +3,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const config = require('../config/dev'); // config.js 파일 불러오기
+// const { auth } = require('../middleware/auth');
+const Photo = require('../models/Photo');
 
 const router = express.Router();
 
@@ -23,9 +25,20 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // 파일 업로드 엔드포인트
-router.post('/', upload.single('image'), (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   try {
+    const userId = req.headers['userid']; // 헤더에서 userId 읽기
+    // const filePath = path.join('uploads', req.file.filename);
+
+
     const filePath = path.join('uploads', req.file.filename);
+
+    // 데이터베이스에 사진 경로와 유저 ID 저장
+    await Photo.create({
+      path: filePath,
+      userId: userId, // 외래키로 User의 id 저장
+    });
+
     res.status(200).json({ success: true, imagePath: filePath });
   } catch (error) {
     console.error("File upload error:", error);

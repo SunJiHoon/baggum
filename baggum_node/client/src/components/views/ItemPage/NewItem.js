@@ -56,9 +56,21 @@ function NewItem() {
     const formData = new FormData();
     formData.append('image', file);
 
+    const currentUserEmail = user.email;
+    const currentUserIdResponse = await axios.get(`${config.baseUrl}/api/users/getId`, {
+      params: {
+        email: currentUserEmail
+      }
+    });
+    const currentUserId = currentUserIdResponse.data.userId;
+
     try {
       const response = await axios.post(`${config.baseUrl}/api/upload`, formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'userId': currentUserId, // userId를 명시적으로 헤더에 추가
+        },
+        withCredentials: true, // 쿠키 포함
       });
       setImagePath(response.data.imagePath); // 서버 응답에서 이미지 경로 설정
     } catch (error) {

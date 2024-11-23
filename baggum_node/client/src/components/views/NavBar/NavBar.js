@@ -26,7 +26,7 @@ const NavBar = () => {
         <div className="left-icons">
           <li><a href="#icon0"><img src="/images/alarm.png" alt="Icon 0" className="img-small"></img></a></li>
           <li><a href="#iconA"><img src="/images/baggumLogo_1.png" alt="Icon A" className="img-small"></img></a></li>
-          <li><a href="#iconB"><img src="images/baggumLogo_2.png" alt="Icon B" className="img-small"></img></a></li>
+          <li><a href="#iconB"><img src="/images/baggumLogo_2.png" alt="Icon B" className="img-small"></img></a></li>
         </div>
         <div className="right-links">
           <li><a href="/">Home</a></li>

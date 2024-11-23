@@ -29,6 +29,7 @@ const cookieParser = require('cookie-parser')
 const { sequelize, User } = require('./models/User'); // sequelize 객체 가져오기
 const Room = require('./models/Room');
 const UserRoomMapping = require('./models/UserRoomMapping');
+const Photo = require('./models/Photo');
 
 
 //application/x-www-form-urlencoded

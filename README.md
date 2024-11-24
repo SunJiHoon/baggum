@@ -50,25 +50,46 @@ Baggum은 사용자가 서로 물건과 서비스를 손쉽게 교환할 수 있
    cd baggum
    npm i```
 
-## 사용법
+## 사용 환경 및 사용법
+### 첫 화면
+![image](https://github.com/user-attachments/assets/6b30175c-900b-4364-9db7-38752f0e6deb)
 
 ### 계정 생성하기
 
-1. 홈페이지에서 '회원가입' 버튼을 클릭합니다.
-2. 이메일 주소와 비밀번호를 입력하고 '가입하기'를 클릭합니다.
-3. 이메일 인증을 완료하여 계정을 활성화합니다.
+1. 로그인 화면에 들어갑니다.
+![image](https://github.com/user-attachments/assets/873e5cee-d03a-45af-a628-d2387860a4e7)
+
+2. 해당 페이지에서 'Don’t have an account?' 버튼을 클릭합니다.
+3. 이메일 주소와 비밀번호를 입력하고 '가입하기'를 클릭합니다.
+
+![image](https://github.com/user-attachments/assets/0a515685-e1e7-483c-aea6-584a411b135b)
+
+4. 이메일 인증을 완료하여 계정을 활성화합니다.
 
 ### 아이템 등록하기
 
 1. 로그인 후 '아이템 등록' 버튼을 클릭합니다.
+![image](https://github.com/user-attachments/assets/d7e42fdf-c53b-4f26-8112-9e0385725b0e)
+
 2. 아이템의 사진, 설명, 교환 조건 등을 입력합니다.
+
+![image](https://github.com/user-attachments/assets/c34a2f93-dd51-48ed-90f7-fde547c050d8)
+
 3. '등록하기'를 클릭하여 아이템을 등록합니다.
+
+
+### 채팅하기
+![image](https://github.com/user-attachments/assets/1ca8370e-a4ee-4e05-85ec-0d5cc463ee00)
 
 ### 교환 신청하기
 
 1. 원하는 아이템을 찾아 상세 페이지로 이동합니다.
-2. '교환 신청' 버튼을 클릭합니다.
+![image](https://github.com/user-attachments/assets/32827c7a-540c-4ea1-99f2-3b5a089206b1)
+
+2. 'Chat With User' 버튼을 클릭합니다.
 3. 메시지를 통해 상대 사용자와 교환 조건을 협의합니다.
+![image](https://github.com/user-attachments/assets/90d9af58-eada-4244-89e2-757569c398ba)
+
 
 ## 라이선스
 이 프로젝트는 MIT 라이선스를 따릅니다. 자세한 내용은 LICENSE 파일을 참조하세요.

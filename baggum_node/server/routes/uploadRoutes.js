@@ -37,6 +37,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     // 데이터베이스에 사진 경로와 유저 ID 저장
     await Photo.create({
       path: filePath,
+      uploadDate: uniqueSuffix,
       userId: userId, // 외래키로 User의 id 저장
     });
 

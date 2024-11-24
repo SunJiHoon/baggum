@@ -5,6 +5,7 @@ const path = require('path');
 const config = require('../config/dev'); // config.js 파일 불러오기
 // const { auth } = require('../middleware/auth');
 const Photo = require('../models/Photo');
+const dayjs = require('dayjs');
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const uniqueSuffix = dayjs().format('YYYY-MM-DD_HH-mm-ss');
     cb(null, uniqueSuffix + '-' + file.originalname);
   },
 });

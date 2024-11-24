@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import { useAuth } from '../../contexts/AuthContext';
+import styles from './NewItem.module.css';  // CSS Modules import
 
 function NewItem() {
   const { isAuthenticated, user } = useAuth();
@@ -106,7 +107,7 @@ function NewItem() {
     <div>
     <NavBar />
 
-    <div>
+    <div className={styles.chatContainer}>
       <h1>Register New Item</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -128,7 +129,6 @@ function NewItem() {
           User ID:
           <input type="number" value={userId} readOnly />
         </label> */}
-        <br />
         <label>
           Image Path:
           {/* <input type="text" value={imagePath} onChange={(e) => setImagePath(e.target.value)} required /> */}
@@ -141,7 +141,9 @@ function NewItem() {
           <input type="text" value={desiredMerchandise} onChange={(e) => setDesiredMerchandise(e.target.value)} required />
         </label>
         <br />
-        <button type="submit">Create</button>
+        <div className={styles.wrapButton} >
+          <button type="submit">Create</button>
+        </div>
       </form>
     </div>
     </div>

@@ -6,6 +6,7 @@ const config = require('../config/dev'); // config.js 파일 불러오기
 // const { auth } = require('../middleware/auth');
 const Photo = require('../models/Photo');
 const dayjs = require('dayjs');
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -13,8 +14,15 @@ const router = express.Router();
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // cb(null, 'uploads'); // 파일이 저장될 폴더
-    cb(null, config.UPLOAD_DIR); // 파일이 저장될 폴더를 절대 경로로 지정
+    const userId = req.headers['userid'];
+    const userDir = path.join(config.UPLOAD_DIR, userId);
 
+    if (!fs.existsSync(userDir)) {
+      fs.mkdirSync(userDir, { recursive: true});
+    }
+
+    //cb(null, config.UPLOAD_DIR); // 파일이 저장될 폴더를 절대 경로로 지정
+    cb(null, userDir);
   },
   filename: (req, file, cb) => {
     file.originalname = Buffer.from(file.originalname, 'latin1').toString('utf8')

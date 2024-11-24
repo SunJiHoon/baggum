@@ -7,6 +7,10 @@ const Photo = sequelize.define('Photo', {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  uploadDate: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
   userId: { // User의 id를 참조하는 외래키
     type: DataTypes.INTEGER,
     allowNull: false,

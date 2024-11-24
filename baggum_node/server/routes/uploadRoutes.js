@@ -32,16 +32,15 @@ router.post('/', upload.single('image'), async (req, res) => {
     // const filePath = path.join('uploads', req.file.filename);
 
 
-    const filePath = path.join('uploads', req.file.filename);
+    const filename = req.file.filename;
 
-    // 데이터베이스에 사진 경로와 유저 ID 저장
+    // 데이터베이스에 사진 파일 이름과 유저 ID 저장
     await Photo.create({
-      path: filePath,
-      uploadDate: uniqueSuffix,
+      path: filename,
       userId: userId, // 외래키로 User의 id 저장
     });
 
-    res.status(200).json({ success: true, imagePath: filePath });
+    res.status(200).json({ success: true, imageFileName: filename });
   } catch (error) {
     console.error("File upload error:", error);
     res.status(500).json({ success: false, message: 'File upload failed' });
